@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Calela</title>
+        <title>Calela Caja Diaria</title>
 
         {{-- <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -36,11 +36,59 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Bienvenido a Calela Caja Diaria</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+<table width="100%" border="solid">
+    <tr>
+        <td colspan="4">Fecha: <?php echo date("Y-m-d"); ?></td>
+        <td colspan="3">Inicio de caja: $1000</td>
+    </tr>
+    <tr >
+        <td>Detalle</td>
+        <td>Efectivo</td>
+        <td>Tarjeta</td>
+        <td>Transf/MP</td>
+        <td>Tela</td>
+        <td>Arreglo</td>
+        <td>Total final</td>
+    </tr>
+    <tr>
+        <td>Algo</td>
+        <td>Algo</td>
+        <td>Algo</td>
+        <td>Algo</td>
+        <td>Algo</td>
+        <td>Algo</td>
+        <td>Algo</td>
+    </tr>
+    <tr>
+        <td>Total ventas:</td>
+        <td>$</td>
+        <td>$</td>
+        <td>$</td>
+        <td>$</td>
+        <td>$</td>
+        <td>$</td>
+    </tr>
+    <tr>
+        <td>Total caja:</td>
+        <td>$</td>
+    </tr>
+    <tr>
+        <td>A pozo:</td>
+        <td>$</td>
+    </tr>
+    <tr>
+        <td>Caja chica:</td>
+        <td>$</td>
+    </tr>
+    <tr>
+        <td>Descripción:</td>
+        <td colspan="7">No hay descripción</td>
+    </tr>
+</table>
 @stop
 
 @section('css')
