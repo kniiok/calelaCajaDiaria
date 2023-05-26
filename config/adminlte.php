@@ -320,8 +320,17 @@ return [
         // ],
         // ['header' => 'account_settings'],
         [
+            'text'    => 'Cerrar sesión',
+            'url'     => '/login',  // Ruta a la que se redirige para cerrar sesión
+            'icon'    => 'fas fa-fw fa-sign-out-alt',
+            'method'  => 'post',  // Método HTTP utilizado para cerrar sesión (por defecto es POST)
+            'class'   => 'dropdown-item',  // Clase CSS para el enlace
+            'onclick' => "event.preventDefault(); document.getElementById('logout-form').submit();",  // Acción JavaScript para enviar el formulario de cierre de sesión
+        ],
+        'right_menu_class' => 'navbar-nav ml-auto',
+        [
             'text' => 'Usuarios',
-            'url'  => 'admin/settings',
+            'url'  => '/usuarios',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

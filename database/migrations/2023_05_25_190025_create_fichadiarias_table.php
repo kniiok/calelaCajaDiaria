@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auditoria', function (Blueprint $table) {
+        Schema::create('fichadiarias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idUsuario');
-            $table->date("fecha");
-            $table->string('operacion');
+            $table->float('inicioCaja', 10, 2);
+            $table->float('totalVentas', 10, 2);
+            $table->float('aPozo', 10, 2);
+            $table->float('cajaChica', 10, 2);
+            $table->text('descripcion');
             $table->timestamps();
 
             $table->foreign('idUsuario')->references('id')->on('users');
+
         });
     }
 
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('auditoria');
+        Schema::dropIfExists('fichadiaria');
     }
 };

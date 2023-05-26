@@ -22,6 +22,7 @@
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
+            
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -33,9 +34,11 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div class="container">
+                <main>
+                    @yield('content')
+                </main>
+            </div>
         </div>
 
         @stack('modals')

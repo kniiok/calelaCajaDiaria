@@ -16,13 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('rolUsuario');
             $table->unsignedBigInteger('estadoUsuario');
             $table->string('nombre');
-            $table->string('clave');
-            $table->boolean('rol');
-            $table->boolean('estado');
-
-            $table->foreign('rolUsuario')->references('id')->on('rol');
-            $table->foreign('estadoUsuario')->references('id')->on('estado');
-
+            $table->string('email');
+            $table->string('password');
+            $table->timestamps();
+            $table->foreign('rolUsuario')->references('id')->on('rols');
+            $table->foreign('estadoUsuario')->references('id')->on('estados');
         });
     }
 

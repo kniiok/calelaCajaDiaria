@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Auth;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// routes/web.php
+
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    } else {
+        return redirect()->route('login');
+    }
 });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -26,3 +37,18 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
+
+Route::get('/usuarios/agregar', function () {
+    return view('usuarios/insert');
+})->name('usuarios.insert');
+
+Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::get('/fichaDiaria', function(){
+    return view('fichaDiaria/index');
+})->name('fichaDiaria.index');

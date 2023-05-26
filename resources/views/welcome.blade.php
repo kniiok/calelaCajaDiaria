@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -31,7 +32,7 @@
                 </div>
             @endif --}}
 
-            @extends('adminlte::page')
+            {{-- @extends('adminlte::page') --}}
 
 @section('title', 'Dashboard')
 
@@ -40,55 +41,7 @@
 @stop
 
 @section('content')
-<table width="100%" border="solid">
-    <tr>
-        <td colspan="4">Fecha: <?php echo date("Y-m-d"); ?></td>
-        <td colspan="3">Inicio de caja: $1000</td>
-    </tr>
-    <tr >
-        <td>Detalle</td>
-        <td>Efectivo</td>
-        <td>Tarjeta</td>
-        <td>Transf/MP</td>
-        <td>Tela</td>
-        <td>Arreglo</td>
-        <td>Total final</td>
-    </tr>
-    <tr>
-        <td>Algo</td>
-        <td>Algo</td>
-        <td>Algo</td>
-        <td>Algo</td>
-        <td>Algo</td>
-        <td>Algo</td>
-        <td>Algo</td>
-    </tr>
-    <tr>
-        <td>Total ventas:</td>
-        <td>$</td>
-        <td>$</td>
-        <td>$</td>
-        <td>$</td>
-        <td>$</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>Total caja:</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>A pozo:</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>Caja chica:</td>
-        <td>$</td>
-    </tr>
-    <tr>
-        <td>Descripción:</td>
-        <td colspan="7">No hay descripción</td>
-    </tr>
-</table>
+
 @stop
 
 @section('css')
