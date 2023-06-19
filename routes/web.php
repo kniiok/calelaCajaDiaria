@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\FichaDiariaVentaController;
 
 
 
@@ -49,6 +50,10 @@ Route::get('/usuarios/agregar', function () {
 })->name('usuarios.insert');
 
 Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
-Route::get('/fichaDiaria', function(){
-    return view('fichaDiaria/index');
-})->name('fichaDiaria.index');
+
+
+Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiariaHoy'])->name('fichadiaria.hoy');
+Route::get('/ventas/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
+Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');
+Route::get('/ventas/finalizar', [FichaDiariaVentaController::class, 'finalizar'])->name('ventas.finalizar');
+Route::post('/ventas', [FichaDiariaVentaController::class, 'finalizarDia'])->name('ventas.finalizarDia');

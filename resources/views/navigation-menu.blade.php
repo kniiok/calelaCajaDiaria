@@ -20,7 +20,7 @@
                         {{ __('Usuarios') }}
                     </x-nav-link>
                     
-                    <x-nav-link href="/fichaDiaria" :active="request()->routeIs('fichas.index')">
+                    <x-nav-link href="{{route('fichadiaria.hoy')}}" :active="request()->routeIs('fichas.index')">
                         {{ __('Ficha Diaria') }}
                     </x-nav-link>
                     <x-nav-link href="/buscarFichas" :active="request()->routeIs('buscar-fichas')">
