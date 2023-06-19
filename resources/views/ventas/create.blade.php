@@ -16,13 +16,13 @@
             <input type="text" name="detalle" id="detalle" required><br><br>
 
             <label for="montoEfectivo">Monto Efectivo:</label>
-            <input type="number" name="montoEfectivo" id="montoEfectivo" step="0.01"><br><br>
+            <input type="number" name="montoEfectivo" id="montoEfectivo" step="0.01" min="0" value= "0"><br><br>
 
             <label for="montoTransferencia">Monto Transferencia:</label>
-            <input type="number" name="montoTransferencia" id="montoTransferencia" step="0.01"><br><br>
+            <input type="number" name="montoTransferencia" id="montoTransferencia" step="0.01" min="0" value= "0"><br><br>
 
             <label for="montoTarjeta">Monto Tarjeta:</label>
-            <input type="number" name="montoTarjeta" id="montoTarjeta" step="0.01"><br><br>
+            <input type="number" name="montoTarjeta" id="montoTarjeta" step="0.01" min="0" value= "0"><br><br>
 
             <button type="submit">Agregar Venta</button>
         </form>
