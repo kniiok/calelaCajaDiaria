@@ -50,11 +50,11 @@ class FichaDiariaVentaController extends Controller
         $ventas = [];
     }
     // Calcular los totales de ventas por tipo
-    $totalEfectivo = $ventas->where('idTipoPago', 1)->sum('monto');
-    $totalTarjeta = $ventas->where('idTipoPago', 2)->sum('monto');
-    $totalTransferencia = $ventas->where('idTipoPago', 3)->sum('monto');
-    $totalArreglo = $ventas->where('idTipoProducto', 1)->sum('monto');
-    $totalTela = $ventas->where('idTipoProducto', 2)->sum('monto');
+    $totalEfectivo = $ventas/*->where('idTipoPago', 1)*/->sum('montoEfectivo');
+    $totalTarjeta = $ventas/*->where('idTipoPago', 2)*/->sum('montoTarjeta');
+    $totalTransferencia = $ventas/*->where('idTipoPago', 3)*/->sum('montoTransferencia');
+    $totalArreglo = $ventas->where('idTipoProducto', 1)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
+    $totalTela = $ventas->where('idTipoProducto', 2)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
 
     // Calcular el total final
     $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
@@ -65,8 +65,8 @@ class FichaDiariaVentaController extends Controller
 public function create()
 {
     $tiposProducto = TipoProducto::all();
-    $tiposPago = TipoPago::all();
-    return view('ventas.create', compact('tiposProducto', 'tiposPago'));
+    //$tiposPago = TipoPago::all();
+    return view('ventas.create', compact('tiposProducto'));
 }
 
 public function store(Request $request)
@@ -77,10 +77,13 @@ public function store(Request $request)
     // Validar y guardar la venta
     $venta = new Venta();
     $venta->idTipoProducto = $request->idTipoProducto;
-    $venta->idTipoPago = $request->idTipoPago;
+    //$venta->idTipoPago = $request->idTipoPago;
+    $venta->montoEfectivo = $request->montoEfectivo;
+    $venta->montoTarjeta = $request->montoTarjeta;
+    $venta->montoTransferencia = $request->montoTransferencia;
     $venta->detalle = $request->detalle;
     $venta->idFichaDiaria = $fichaDiaria->id; // Asignar el ID de la ficha diaria actual
-    $venta->monto = $request->monto;
+    //$venta->monto = $request->monto;
     $venta->fecha = Carbon::now(); // Establecer la fecha actual
     $venta->save();
 
