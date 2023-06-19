@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idTipoProducto');
-            $table->unsignedBigInteger('idTipoPago');
             $table->unsignedBigInteger('idFichaDiaria');
             $table->date('fecha');
             $table->string('detalle');
-            $table->float('monto', 10, 2);
+            $table->float('montoEfectivo', 10, 2);
+            $table->float('montoTarjeta', 10, 2);
+            $table->float('montoTransferencia', 10, 2);
             $table->timestamps();
 
             $table->foreign('idTipoProducto')->references('id')->on('tipoProductos');
-            $table->foreign('idTipoPago')->references('id')->on('tipoPagos');
             $table->foreign('idFichaDiaria')->references('id')->on('fichadiarias');
         });
     }

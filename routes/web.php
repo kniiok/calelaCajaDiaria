@@ -56,4 +56,7 @@ Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiar
 Route::get('/ventas/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
 Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');
 Route::get('/ventas/finalizar', [FichaDiariaVentaController::class, 'finalizar'])->name('ventas.finalizar');
-Route::post('/ventas', [FichaDiariaVentaController::class, 'finalizarDia'])->name('ventas.finalizarDia');
+Route::post('/ventas/finalizar/listo', [FichaDiariaVentaController::class, 'finalizarDia'])->name('ventas.finalizarDia');
+Route::get(('/fichas/buscar'), function (){
+    return view('buscarFicha.index');})->name('fichas.buscar');
+Route::get('/fichas/buscar/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');

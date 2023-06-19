@@ -23,7 +23,7 @@
                     <x-nav-link href="{{route('fichadiaria.hoy')}}" :active="request()->routeIs('fichas.index')">
                         {{ __('Ficha Diaria') }}
                     </x-nav-link>
-                    <x-nav-link href="/buscarFichas" :active="request()->routeIs('buscar-fichas')">
+                    <x-nav-link href="{{route('fichas.buscar')}}" :active="request()->routeIs('buscar-fichas')">
                         {{ __('Buscar Fichas') }}
                     </x-nav-link>
                 </div>

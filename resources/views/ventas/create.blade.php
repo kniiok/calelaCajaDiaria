@@ -12,18 +12,17 @@
                 @endforeach
             </select><br><br>
 
-            <label for="idTipoPago">Tipo de Pago:</label>
-            <select name="idTipoPago" id="idTipoPago" required>
-                @foreach($tiposPago as $tipoPago)
-                    <option value="{{ $tipoPago->id }}">{{ $tipoPago->tipo }}</option>
-                @endforeach
-            </select><br><br>
-
             <label for="detalle">Detalle:</label>
             <input type="text" name="detalle" id="detalle" required><br><br>
 
-            <label for="monto">Monto:</label>
-            <input type="number" name="monto" id="monto" step="0.01" required><br><br>
+            <label for="montoEfectivo">Monto Efectivo:</label>
+            <input type="number" name="montoEfectivo" id="montoEfectivo" step="0.01"><br><br>
+
+            <label for="montoTransferencia">Monto Transferencia:</label>
+            <input type="number" name="montoTransferencia" id="montoTransferencia" step="0.01"><br><br>
+
+            <label for="montoTarjeta">Monto Tarjeta:</label>
+            <input type="number" name="montoTarjeta" id="montoTarjeta" step="0.01"><br><br>
 
             <button type="submit">Agregar Venta</button>
         </form>

@@ -43,41 +43,29 @@
                                 <tr>
                                     <td class="py-2 px-4 border-b border-gray-200">{{ $venta->detalle }}</td>
                                     <td class="py-2 px-4 border-b border-gray-200">
-                                        @if ($venta->idTipoPago == '1')
-                                            ${{ $venta->monto }}
-                                            @php $totalEfectivo += $venta->monto; @endphp
-                                        @else
-                                            $0
-                                        @endif
+                                        ${{ $venta->montoEfectivo }}
+                                        @php $totalEfectivo += $venta->montoEfectivo; @endphp
+                                    </td>
+                                    <td class="py-2 px-4 border-b border-gray-200">                                        
+                                        ${{ $venta->montoTarjeta }}
+                                        @php $totalTarjeta += $venta->montoTarjeta; @endphp
                                     </td>
                                     <td class="py-2 px-4 border-b border-gray-200">
-                                        @if ($venta->idTipoPago == '2')
-                                            ${{ $venta->monto }}
-                                            @php $totalTarjeta += $venta->monto; @endphp
-                                        @else
-                                            $0
-                                        @endif
-                                    </td>
-                                    <td class="py-2 px-4 border-b border-gray-200">
-                                        @if ($venta->idTipoPago == '3')
-                                            ${{ $venta->monto }}
-                                            @php $totalTransferencia += $venta->monto; @endphp
-                                        @else
-                                            $0
-                                        @endif
+                                        ${{ $venta->montoTransferencia }}
+                                        @php $totalTransferencia += $venta->montoTransferencia; @endphp
                                     </td>
                                     <td class="py-2 px-4 border-b border-gray-200">
                                         @if ($venta->idTipoProducto == 2)
-                                            ${{ $venta->monto }}
-                                            @php $totalTela += $venta->monto; @endphp
+                                            ${{ $venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia }}
+                                            @php $totalTela += ($venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia); @endphp
                                         @else
                                             $0
                                         @endif
                                     </td>
                                     <td class="py-2 px-4 border-b border-gray-200">
                                         @if ($venta->idTipoProducto == 1)
-                                            ${{ $venta->monto }}
-                                            @php $totalArreglo += $venta->monto; @endphp
+                                            ${{ $venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia }}
+                                            @php $totalArreglo += ($venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia); @endphp
                                         @else
                                             $0
                                         @endif
