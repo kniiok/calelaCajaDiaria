@@ -13,7 +13,7 @@
                 <table class="w-full border-solid border bg-white">
                     <tr class="bg-gray-200">
                         <td colspan="4" class="py-2 px-4 border-b border-gray-200">
-                            Fecha: {{ date("Y-m-d") }}
+                            Fecha: {{ date("d-m-Y") }}
                         </td>
                         <td colspan="3" class="py-2 px-4 border-b border-gray-200">
                             Inicio de caja: ${{ $fichaDiaria->inicioCaja }}

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FichaDiaria;
 use App\Models\TipoProducto;
-use App\Models\TipoPago;
+//use App\Models\TipoPago;
 use Illuminate\Http\Request;
 use App\Models\Venta;
 use Carbon\Carbon;
@@ -15,12 +15,11 @@ class FichaDiariaVentaController extends Controller
     public function mostrarFichaDiariaHoy()
 {
     $fechaActual = Carbon::now()->toDateString();
-
     // Obtener la ficha diaria anterior a la actual
     $fichaAnterior = FichaDiaria::whereDate('created_at', '<', $fechaActual)
         ->orderBy('created_at', 'desc')
         ->first();
-
+    
     if ($fichaAnterior) {
         // Obtener el valor de "cajaChica" de la ficha diaria anterior
         $inicioCaja = $fichaAnterior->cajaChica;
@@ -28,7 +27,6 @@ class FichaDiariaVentaController extends Controller
         // Si no hay una ficha anterior, establecer un valor predeterminado
         $inicioCaja = 0; // Valor inicial de la caja
     }
-
 
     // Buscar la ficha diaria actual
     $fichaDiaria = FichaDiaria::whereDate('created_at', $fechaActual)->first();
@@ -125,5 +123,16 @@ public function finalizarDia(Request $request)
     return redirect()->route('fichadiaria.hoy')->with('success', 'Día finalizado exitosamente');
 }
 
-
+/*public function buscar(Request $request){
+    SELECT tp.tipo, sum(t.montoEfectivo)as efectivo, sum(t.montoTarjeta) as tarjeta, 
+       sum(t.montoTransferencia) as transferencia 
+FROM `ventas` as t
+inner join `tipoproductos` as tp on (tp.id = t.idTipoProducto)
+WHERE t.fecha = date('2023-06-19')
+group by tp.tipo
+order by t.created_at;
+select sum(t.montoEfectivo+t.montoTarjeta+t.montoTransferencia) as sumaTotal
+from `ventas` as t
+WHERE t.fecha = date('2023-06-19');
+}  */ 
 }
