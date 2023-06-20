@@ -55,7 +55,7 @@
                                         @php $totalTransferencia += $venta->montoTransferencia; @endphp
                                     </td>
                                     <td class="py-2 px-4 border-b border-gray-200">
-                                        @if ($venta->idTipoProducto == 2)
+                                        @if ($venta->idTipoProducto == 1)
                                             ${{ $venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia }}
                                             @php $totalTela += ($venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia); @endphp
                                         @else
@@ -63,7 +63,7 @@
                                         @endif
                                     </td>
                                     <td class="py-2 px-4 border-b border-gray-200">
-                                        @if ($venta->idTipoProducto == 1)
+                                        @if ($venta->idTipoProducto == 2)
                                             ${{ $venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia }}
                                             @php $totalArreglo += ($venta->montoEfectivo+$venta->montoTarjeta+$venta->montoTransferencia); @endphp
                                         @else
@@ -79,7 +79,7 @@
                         @endif
                         
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td class="py-2 px-4 border-b border-gray-200">Total ventas:</td>
                         <td class="py-2 px-4 border-b border-gray-200">${{ $totalEfectivo }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">${{ $totalTarjeta }}</td>
@@ -88,30 +88,33 @@
                         <td class="py-2 px-4 border-b border-gray-200">${{ $totalArreglo }}</td>
                         <td class="py-2 px-4 border-b border-gray-200">${{ $totalFinal }}</td>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td class="py-2 px-4 border-b border-gray-200">Total caja:</td>
                         <td class="py-2 px-4 border-b border-gray-200">${{ $totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja }}</td>
+                        <td></td><td></td><td></td><td></td><td></td>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td class="py-2 px-4 border-b border-gray-200">A pozo:</td>
                         <td class="py-2 px-4 border-b border-gray-200">${{ $aPozo = $fichaDiaria->aPozo}}</td>
+                        <td></td><td></td><td></td><td></td><td></td>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td class="py-2 px-4 border-b border-gray-200">Caja chica:</td>
-                        <td class="py-2 px-4 border-b border-gray-200">${{$cajaChica = $totalFinal-$aPozo}}</td>
+                        <td class="py-2 px-4 border-b border-gray-200">${{$cajaChica = $totalCaja-$aPozo}}</td>
+                        <td></td><td></td><td></td><td></td><td></td>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td class="py-2 px-4 border-b border-gray-200">Descripción:</td>
                         <th colspan="7" class="py-2 px-4 border-b border-gray-200">{{$fichaDiaria->descripcion}}</th>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td colspan="7" class="py-2 px-4 border-b border-gray-200 text-center">
                             <a href="{{ route('ventas.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Agregar venta
                             </a>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-200">
                         <td colspan="7" class="py-2 px-4 border-b border-gray-200 text-center">
                             <a href="{{ route('ventas.finalizar') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                             Finalizar día
@@ -120,14 +123,14 @@
                     </tr>                   
                 </table>
                 @php
-    $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
-    $fichaDiaria->totalVentas = $totalFinal;
-    $fichaDiaria->aPozo = $aPozo;
-    $fichaDiaria->cajaChica = $cajaChica;
-    $fichaDiaria->descripcion = $fichaDiaria->descripcion;
-    $fichaDiaria->save();
-@endphp
-
+                    $fichaDiaria->totalVentas = $totalFinal;
+                    $fichaDiaria->totalTela = $totalTela;
+                    $fichaDiaria->totalArreglo = $totalArreglo;
+                    $fichaDiaria->aPozo = $aPozo;
+                    $fichaDiaria->cajaChica = $cajaChica;
+                    $fichaDiaria->descripcion = $fichaDiaria->descripcion;
+                    $fichaDiaria->save();
+                @endphp
             </div>
         </div>
     </div>

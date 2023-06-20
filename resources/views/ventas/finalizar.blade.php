@@ -6,7 +6,7 @@
 <form action="{{ route('ventas.finalizarDia') }}" method="POST">
     @csrf
     <input type="hidden" name="id" value="{{ $idActual }}">
-    <label for="apozoInput">Valor de aPozo:</label>
+    <label for="apozoInput">Valor de pozo:</label>
     <input type="text" name="aPozo" id="apozoInput" placeholder="Valor de aPozo" required><br><br>
     <label for="descripcionInput">Descripción:</label>
     <input type="text" name="descripcion" id="descripcionInput" placeholder="Descripción" required><br><br>

@@ -67,6 +67,29 @@ public function create()
     return view('ventas.create', compact('tiposProducto'));
 }
 
+public function buscar(Request $request)
+{
+    $fecha = $request->fecha;
+    $fichaDiaria = FichaDiaria::whereDate('created_at', $fecha)->first();
+    $ventas = Venta::whereDate('fecha', $fecha)->get();
+    // Obtener la fecha seleccionada en el formulario
+    $fechaSeleccionada = $request->input('fecha');
+
+    // Convertir la fecha seleccionada a objeto Carbon para facilitar la manipulación
+    $fecha = Carbon::createFromFormat('Y-m-d', $fechaSeleccionada);
+
+    // Calcular la fecha anterior
+    $fechaAnterior = $fecha->subDay()->toDateString();
+
+    // Calcular la fecha siguiente
+    $fechaSiguiente = $fecha->addDay()->toDateString();
+    if (!$fichaDiaria) {
+        return view('buscarFicha.index', ['fecha' => $fecha, 'error' => true, 'fechaSeleccionada' => $fechaSeleccionada, 'fechaAnterior' => $fechaAnterior, 'fechaSiguiente' => $fechaSiguiente]);
+    }
+
+    return view('buscarFicha.index', compact('fecha', 'fichaDiaria', 'ventas'));
+}
+
 public function store(Request $request)
 {
     // Obtener la ficha diaria actual

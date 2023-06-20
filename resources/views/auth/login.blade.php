@@ -41,7 +41,7 @@
 
                 <div align="center" class="block mt-4">
                 <x-button class="ml-4">
-                    {{ __('Log in') }}
+                    {{ __('Iniciar sesión') }}
                 </x-button>
                 </div>
             </div>

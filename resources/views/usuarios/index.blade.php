@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<a href="/usuarios/agregar" class="btn btn-primary">Agregar usuario</a>
 
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,23 +12,31 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
             <table class="w-full border-solid border bg-white">
                 <thead>
-                    <tr>
-                        <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2">Nombre</th>
+                    <tr class="bg-gray-200">
+                        <th class="py-2 px-4 border-b border-gray-200">ID</th>
+                        <th class="py-2 px-4 border-b border-gray-200">Nombre</th>
                         <!-- Otros campos de usuario que deseas mostrar -->
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td class="border px-4 py-2">{{ $user->id }}</td>
-                            <td class="border px-4 py-2">{{ $user->nombre }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $user->id }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $user->nombre }}</td>
                             <!-- Otros campos de usuario que deseas mostrar -->
                         </tr>
                     @endforeach
+                    <tr class="bg-gray-200">
+                        <td colspan="2" class="py-2 px-4 border-b border-gray-200">
+                            <div align="center">
+                                <a href="/usuarios/agregar" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">Agregar usuario</a>
+                                </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 @endsection

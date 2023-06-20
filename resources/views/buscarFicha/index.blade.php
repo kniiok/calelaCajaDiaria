@@ -1,8 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
+
 <div align="center">
-    <form action="{{ route('fichas.buscada') }}" method="GET" class="my-4">
+    <form action="{{ route('fichas.buscada') }}" method="get" class="my-4">
         @csrf
         <label for="fecha" class="mr-2">Buscar ficha por fecha:</label>
         <input type="date" name="fecha" id="fecha" required class="px-2 py-1 border rounded"><br><br>
@@ -70,7 +70,7 @@
                                     @php $totalTransferencia += $venta->montoTransferencia; @endphp
                                 </td>
                                 <td class="py-2 px-4 border-b border-gray-200">
-                                    @if ($venta->idTipoProducto == 2)
+                                    @if ($venta->idTipoProducto == 1)
                                         ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}
                                         @php $totalTela += ($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia); @endphp
                                     @else
@@ -78,7 +78,7 @@
                                     @endif
                                 </td>
                                 <td class="py-2 px-4 border-b border-gray-200">
-                                    @if ($venta->idTipoProducto == 1)
+                                    @if ($venta->idTipoProducto == 2)
                                         ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}
                                         @php $totalArreglo += ($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia); @endphp
                                     @else

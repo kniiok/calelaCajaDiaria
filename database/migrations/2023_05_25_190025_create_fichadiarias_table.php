@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idUsuario');
             $table->float('inicioCaja', 10, 2);
             $table->float('totalVentas', 10, 2);
+            $table->float('totalTela', 10, 2)->default(0);
+            $table->float('totalArreglo', 10, 2)->default(0);
             $table->float('aPozo', 10, 2);
             $table->float('cajaChica', 10, 2);
             $table->text('descripcion');
