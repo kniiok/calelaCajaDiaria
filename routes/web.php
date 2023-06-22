@@ -71,3 +71,7 @@ Route::post('/ventas/finalizar/listo', [FichaDiariaVentaController::class, 'fina
 Route::get(('/buscar'), function (){
     return view('buscarFicha.index');})->name('fichas.buscar');
 Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');
+
+
+// Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
+// Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
