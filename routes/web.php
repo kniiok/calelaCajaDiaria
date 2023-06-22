@@ -55,10 +55,14 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout');
-Route::get('/usuarios/agregar', function () {
-    return view('usuarios/insert');
-})->name('usuarios.insert');
-Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::middleware(['auth'])->group(function () {
+    Route::group(['middleware' => ['role_user:1']], function () {
+        Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+        Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
+    });
+});
+
+
 Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiariaHoy'])->name('fichadiaria.hoy');
 Route::get('/ventas/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
 Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');

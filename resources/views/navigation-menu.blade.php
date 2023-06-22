@@ -11,24 +11,30 @@
                 </div>
 
                 <!-- Navigation Links -->
-                
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     {{-- <x-nav-link href="/dashboard" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link> --}}
-                    <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
-                        {{ __('Usuarios') }}
-                    </x-nav-link>
-                    
-                    <x-nav-link href="{{route('fichadiaria.hoy')}}" :active="request()->routeIs('fichas.index')">
+
+                    @if(auth()->check() && auth()->user()->rolUsuario === 1)
+                        <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
+                            {{ __('Usuarios') }}
+                        </x-nav-link>
+                    @endif
+
+                    <x-nav-link href="{{ route('fichadiaria.hoy') }}" :active="request()->routeIs('fichas.index')">
                         {{ __('Ficha Diaria') }}
                     </x-nav-link>
-                    <x-nav-link href="{{route('fichas.buscar')}}" :active="request()->routeIs('buscar-fichas')">
+
+                    <x-nav-link href="{{ route('fichas.buscar') }}" :active="request()->routeIs('buscar-fichas')">
                         {{ __('Buscar Fichas') }}
                     </x-nav-link>
-                    <x-nav-link href="{{-- {{route('fichas.buscar')}}" :active="request()->routeIs('buscar-fichas') --}}">
-                        {{ __('Estadísticas') }}
-                    </x-nav-link>
+
+                    @if(auth()->check() && auth()->user()->rolUsuario === 1)
+                        <x-nav-link href="{{-- {{route('fichas.buscar')}}" :active="request()->routeIs('buscar-fichas') --}}">
+                            {{ __('Estadísticas') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -144,14 +150,20 @@
                             {{-- <div class="border-t border-gray-200"></div> --}}
 
                             <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
+<div class="flex items-center justify-end">
+    <span>{{ Auth::user()->nombre }}</span>
+    <form method="POST" action="{{ route('logout') }}" x-data>
+        @csrf
+        
+            <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                {{ __('Cerrar sesión') }}
+            </x-dropdown-link>
+    </form>
+</div>
 
-                                <x-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
-                                    {{ __('Cerrar sesión') }}
-                                </x-dropdown-link>
-                            </form>
+
+
+
                         {{-- </x-slot> --}}
                     {{-- </x-dropdown> --}}
                 </div>
@@ -170,14 +182,15 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('fichadiaria.hoy') }}" :active="request()->routeIs('fichadiaria.hoy')">
-                {{ __('Ficha Diaria') }}
-            </x-responsive-nav-link>
-        </div>
+<div :class="{'block': open, 'hidden': !open}" class="hidden sm:hidden">
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('fichadiaria.hoy') }}" :active="request()->routeIs('fichadiaria.hoy')">
+            {{ __('Ficha Diaria') }}
+        </x-responsive-nav-link>
+    </div>
+</div>
 
-        <!-- Responsive Settings Options -->
+        {{-- <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -193,37 +206,37 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <!-- Account Management -->
+                {{-- <!-- Account Management -->
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
+                </x-responsive-nav-link> --}}
 
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                {{-- @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-responsive-nav-link>
-                @endif
+                @endif --}}
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
+                {{-- <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
                     <x-responsive-nav-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
                         {{ __('Cerrar sesión') }}
                     </x-responsive-nav-link>
-                </form>
+                </form> --}}
 
                 <!-- Team Management -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="border-t border-gray-200"></div>
 
                     <div class="block px-4 py-2 text-xs text-gray-400">
                         {{ __('Manage Team') }}
-                    </div>
+                    </div> --}}
 
                     <!-- Team Settings -->
-                    <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
+                    {{-- <x-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
 
@@ -231,10 +244,10 @@
                         <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
                             {{ __('Create New Team') }}
                         </x-responsive-nav-link>
-                    @endcan
+                    @endcan --}}
 
                     <!-- Team Switcher -->
-                    @if (Auth::user()->allTeams()->count() > 1)
+                    {{-- @if (Auth::user()->allTeams()->count() > 1)
                         <div class="border-t border-gray-200"></div>
 
                         <div class="block px-4 py-2 text-xs text-gray-400">
@@ -245,8 +258,8 @@
                             <x-switchable-team :team="$team" component="responsive-nav-link" />
                         @endforeach
                     @endif
-                @endif
-            </div>
+                @endif --}}
+            {{-- </div> --}}
         </div>
     </div>
 </nav>
