@@ -151,7 +151,16 @@
 
                             <!-- Authentication -->
 <div class="flex items-center justify-end">
+    @if (Auth::check())
     <span>{{ Auth::user()->nombre }}</span>
+@else
+    @php
+        return redirect()->route('login');
+        exit;
+    @endphp
+@endif
+
+
     <form method="POST" action="{{ route('logout') }}" x-data>
         @csrf
         
