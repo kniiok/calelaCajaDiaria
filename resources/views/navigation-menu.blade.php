@@ -35,6 +35,9 @@
                             {{ __('Estadísticas') }}
                         </x-nav-link>
                     @endif
+                    <x-nav-link href="{{route('audit.index')}}" :active="request()->routeIs('buscar')">
+                        {{ __('Auditorias') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -263,3 +266,4 @@
         </div>
     </div>
 </nav>
+
