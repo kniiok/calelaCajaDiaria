@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    
+    public function audits(){
+        return $this->hasMany(Audit::class);
+    }
+    public function rol(){
+        return $this->belongsTo(Rol::class);
+    }
 }

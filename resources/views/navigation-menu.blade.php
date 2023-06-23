@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link> --}}
 
-                    @if(auth()->check() && auth()->user()->rolUsuario === 1)
+                    @if(auth()->check() && auth()->user()->rol_id === 1)
                         <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
                             {{ __('Usuarios') }}
                         </x-nav-link>
@@ -30,11 +30,14 @@
                         {{ __('Buscar Fichas') }}
                     </x-nav-link>
 
-                    @if(auth()->check() && auth()->user()->rolUsuario === 1)
+                    @if(auth()->check() && auth()->user()->rol_id === 1)
                         <x-nav-link href="{{-- {{route('fichas.buscar')}}" :active="request()->routeIs('buscar-fichas') --}}">
                             {{ __('Estadísticas') }}
                         </x-nav-link>
                     @endif
+                    <x-nav-link href="{{route('audit.index')}}" :active="request()->routeIs('buscar')">
+                        {{ __('Auditorias') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -272,3 +275,4 @@
         </div>
     </div>
 </nav>
+

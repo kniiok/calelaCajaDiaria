@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auditorias', function (Blueprint $table) {
+        Schema::create('audits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUsuario');
+            $table->unsignedBigInteger('user_id');
             $table->date("fecha");
             $table->string('operacion');
             $table->timestamps();
 
-            $table->foreign('idUsuario')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade'); 
         });
     }
 

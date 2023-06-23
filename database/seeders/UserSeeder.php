@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'rolUsuario' => 1,
+            'rol_id' => 1,
             'estadoUsuario' => 1,
             'nombre' => 'Administrador',
             'email' => 'admin@example.com',
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'rolUsuario' => 2,
+            'rol_id' => 2,
             'estadoUsuario' => 1,
             'nombre' => 'Usuario',
             'email' => 'user@example.com',
