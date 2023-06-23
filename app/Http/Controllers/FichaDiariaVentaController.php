@@ -8,12 +8,15 @@ use App\Models\TipoProducto;
 use Illuminate\Http\Request;
 use App\Models\Venta;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 class FichaDiariaVentaController extends Controller
 {
     public function mostrarFichaDiariaHoy()
 {
+    //Establece la zona horaria de Argentina
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+
     $fechaActual = Carbon::now()->toDateString();
     // Obtener la ficha diaria anterior a la actual
     $fichaAnterior = FichaDiaria::whereDate('created_at', '<', $fechaActual)
@@ -108,6 +111,15 @@ public function store(Request $request)
     $venta->fecha = Carbon::now(); // Establecer la fecha actual
     $venta->save();
 
+   //carga una actividad realizada por el usuario
+    $audit = [
+        'operacion' => 'Registro venta N°'.$venta->id.' - Por producto tipo '.$venta->idTipoProducto,
+        'user_id'=> auth()->user()->id,
+        'fecha'=> Carbon::now()
+    ];
+    
+    DB::table('audits')->insert($audit);
+   
     // Redireccionar a la vista fichaDiaria.index
     return redirect()->route('fichadiaria.hoy');
 }
@@ -142,6 +154,16 @@ public function finalizarDia(Request $request)
     $fichaDiaria->descripcion = $request->descripcion;
     $fichaDiaria->save();
 
+//  registro actividad del usuario
+
+    $audit = [
+        'operacion' => 'Finalizo dia',
+        'user_id'=> auth()->user()->id,
+        'fecha'=> Carbon::now()
+    ];
+    
+    DB::table('audits')->insert($audit);
+    
     // Redireccionar a la vista fichaDiaria.index
     return redirect()->route('fichadiaria.hoy')->with('success', 'Día finalizado exitosamente');
 }

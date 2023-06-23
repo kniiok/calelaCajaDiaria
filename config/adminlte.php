@@ -347,6 +347,11 @@ return [
             'text' => 'Idea',
 'url'  => 'admin/settings',
 'icon' => 'fas fa-fw fa-lightbulb',
+],
+[
+    'text' => 'Auditoria',
+'url'  => 'admin/settings',
+'icon' => 'fas fa-fw fa-lightbulb',
 
         ],
         // [

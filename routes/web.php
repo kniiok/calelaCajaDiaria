@@ -73,5 +73,5 @@ Route::get(('/buscar'), function (){
 Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');
 
 
-// Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
-// Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
+Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
+Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
