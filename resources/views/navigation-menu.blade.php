@@ -35,9 +35,11 @@
                             {{ __('Estadísticas') }}
                         </x-nav-link>
                     @endif
+                    @if(auth()->check() && auth()->user()->rol_id === 1)
                     <x-nav-link href="{{route('audit.index')}}" :active="request()->routeIs('buscar')">
                         {{ __('Auditorias') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 

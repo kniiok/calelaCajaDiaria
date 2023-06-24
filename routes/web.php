@@ -56,10 +56,13 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout');
+
 Route::middleware(['auth'])->group(function () {
-    Route::group(['middleware' => ['role_user:1']], function () {
+    Route::group(['middleware' => ['rol_id:1']], function () {
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
         Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
+        Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
+Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
     });
 });
 
@@ -72,7 +75,3 @@ Route::post('/ventas/finalizar/listo', [FichaDiariaVentaController::class, 'fina
 Route::get(('/buscar'), function (){
     return view('buscarFicha.index');})->name('fichas.buscar');
 Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');
-
-
-Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
-Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
