@@ -156,9 +156,6 @@
 
                             <!-- Authentication -->
 <div class="flex items-center justify-end">
-<<<<<<< HEAD
-    {{-- <span>{{ Auth::user()->nombre }}</span> --}}
-=======
     @if (Auth::check())
     <span>{{ Auth::user()->nombre }}</span>
 @else
@@ -168,8 +165,6 @@
     @endphp
 @endif
 
-
->>>>>>> main
     <form method="POST" action="{{ route('logout') }}" x-data>
         @csrf
         
