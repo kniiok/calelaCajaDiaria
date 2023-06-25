@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
         Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
         Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
-Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
+        Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
     });
 });
 
