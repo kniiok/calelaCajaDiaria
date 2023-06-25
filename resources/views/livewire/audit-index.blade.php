@@ -34,17 +34,14 @@
                     @endif</td>
                     
                     <td width='10px'> <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{route('audit.show', $user->id)}}">
-                    Más</a></td>
+                    Auditar</a></td>
 
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-  
-   <footer>
-    {{$users->links()}}
-   </footer>    
+    
     @else
     <div class="text-center">
         <strong>No hay registros</strong>

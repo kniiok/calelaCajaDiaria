@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\AuditController;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -26,14 +27,10 @@ class AuditShow extends Component
     public function render()
     { 
         $user = $this->user;
-        if ($user) {
-            // $this->search = '';
-        // $users = User::where('nombre','LIKE' ,'%'.$this->search.'%')
-        // ->orWhere('email','LIKE' ,'%'.$this->search.'%')
-        // ->orWhere('estadoUsuario','LIKE' ,'%'.$this->search.'%')
-        // ->orWhere('created_at','LIKE' ,'%'.$this->search.'%')
-        // ->paginate();
-            $auditoriasDelUsuario = $user->audits;
+        if ($user) { 
+            $auditoriasDelUsuario = User::find($this->user->id)->audits()->where('fecha', 'LIKE','%'.$this->search.'%')
+            ->orWhere('operacion','LIKE' ,'%'.$this->search.'%')
+            ->paginate(10);
             $rol = $user->rol->tipoRol;
             return view('livewire.audit-show', compact('auditoriasDelUsuario', 'user','rol'));
         }else{

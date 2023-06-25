@@ -39,9 +39,41 @@
                     </tbody>
                 </table>
             </div>
-            <footer>
-                {{-- {{$auditoriasDelUsuario->links()}} --}}
-               </footer>   
+            <div class="flex items-center justify-center mt-8">
+                <div class="flex">
+                  <!-- Enlace de página anterior -->
+                  @if ($auditoriasDelUsuario->onFirstPage())
+                    <span class="py-2 px-4 bg-gray-300 text-gray-600 font-semibold border border-gray-300 cursor-not-allowed">
+                      Anterior
+                    </span>
+                  @else
+                    <a href="{{ $auditoriasDelUsuario->previousPageUrl() }}" class="py-2 px-4 bg-white text-gray-600 font-semibold border border-gray-300 hover:bg-gray-200">
+                      Anterior
+                    </a>
+                  @endif
+              
+                  <!-- Enlaces de páginas -->
+                  @foreach ($auditoriasDelUsuario->getUrlRange(1, $auditoriasDelUsuario->lastPage()) as $page => $url)
+                    @if ($page == $auditoriasDelUsuario->currentPage())
+                      <span class="py-2 px-4 bg-blue-500 text-white font-semibold border border-blue-500">{{ $page }}</span>
+                    @else
+                    
+                      <a href="{{ $url }}" class="py-2 px-4 bg-white text-gray-600 font-semibold border border-gray-300 hover:bg-gray-200">{{ $page}}</a>
+                    @endif
+                  @endforeach
+              
+                  <!-- Enlace de página siguiente -->
+                  @if ($auditoriasDelUsuario->hasMorePages())
+                    <a href="{{ $auditoriasDelUsuario->nextPageUrl() }}" class="py-2 px-4 bg-white text-gray-600 font-semibold border border-gray-300 hover:bg-gray-200">
+                      Siguiente
+                    </a>
+                  @else
+                    <span class="py-2 px-4 bg-gray-300 text-gray-600 font-semibold border border-gray-300 cursor-not-allowed">
+                      Siguiente
+                    </span>
+                  @endif
+                </div>
+              </div>
             @else
             <div class="text-center">
                 <strong>No hay registros</strong>

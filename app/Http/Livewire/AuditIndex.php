@@ -17,12 +17,11 @@ class AuditIndex extends Component
     }
     public function render()
     { 
-        $this->search = '';
         $users = User::where('nombre','LIKE' ,'%'.$this->search.'%')
         ->orWhere('email','LIKE' ,'%'.$this->search.'%')
         ->orWhere('estadoUsuario','LIKE' ,'%'.$this->search.'%')
         ->orWhere('created_at','LIKE' ,'%'.$this->search.'%')
-        ->paginate();
+        ->paginate(10);
         return view('livewire.audit-index', compact('users'));
     }
 }
