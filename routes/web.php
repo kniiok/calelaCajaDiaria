@@ -61,17 +61,18 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['rol_id:1']], function () {
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
         Route::get('/usuarios/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
-        Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
-        Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
+        
     });
 });
-
+Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
+        Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
 
 Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiariaHoy'])->name('fichadiaria.hoy');
 Route::get('/ventas/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
 Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');
 Route::get('/ventas/finalizar', [FichaDiariaVentaController::class, 'finalizar'])->name('ventas.finalizar');
 Route::post('/ventas/finalizar/listo', [FichaDiariaVentaController::class, 'finalizarDia'])->name('ventas.finalizarDia');
+Route::delete('/ventas/{venta}', [FichaDiariaVentaController::class, 'destroy'])->name('ventas.destroy');
 Route::get(('/buscar'), function (){
     return view('buscarFicha.index');})->name('fichas.buscar');
 Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');

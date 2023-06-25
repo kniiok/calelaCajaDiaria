@@ -180,4 +180,12 @@ select sum(t.montoEfectivo+t.montoTarjeta+t.montoTransferencia) as sumaTotal
 from `ventas` as t
 WHERE t.fecha = date('2023-06-19');
 }  */ 
+public function destroy(Venta $venta)
+{
+    $venta->delete();
+
+    return redirect()->route('fichadiaria.hoy');
+    // Redireccionar o realizar otras acciones necesarias
+}
+
 }
