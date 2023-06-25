@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-
+@livewire('audit-index')
+{{-- 
 <header class="ml-4 pl-4">
     <h1 class="m-auto p-auto text-xl text-center">Auditorias lista de usuarios registrados</h1>
     <p><strong>Rol:</strong> {{$user->rol->tipoRol}}<br>
@@ -52,7 +53,7 @@
             </table>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 @endsection

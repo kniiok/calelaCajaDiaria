@@ -13,13 +13,14 @@ class AuditController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->rol->tipoRol != 'Administrador') {
+        // if (auth()->user()->rol->tipoRol != 'Administrador') {
 
-            return redirect()->route('audit.show', ['user' => auth()->user()->id]);
-        }
-        $users = User::orderBy('nombre', 'asc')->get();
-        $user = auth()->user();
-        return view('audit.audits', compact('users', 'user'));
+        //     return redirect()->route('audit.show', ['user' => auth()->user()->id]);
+        // }
+        // $users = User::orderBy('nombre', 'asc')->get();
+        // $user = auth()->user();
+        // return view('audit.audits', compact('users', 'user'));
+        return view('audit.audits');
     }
 
     /**

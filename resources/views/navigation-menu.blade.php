@@ -154,7 +154,7 @@
 
                             <!-- Authentication -->
 <div class="flex items-center justify-end">
-    <span>{{ Auth::user()->nombre }}</span>
+    {{-- <span>{{ Auth::user()->nombre }}</span> --}}
     <form method="POST" action="{{ route('logout') }}" x-data>
         @csrf
         
