@@ -14,11 +14,22 @@
                     <table class="w-full border-solid border bg-white">
                         <thead>
                             <tr class="bg-gray-200">
-                                <th colspan="4" class="py-2 px-4 border-b border-gray-200">
-                                    Fecha: {{ date("d/m/Y") }}
-                                </th>
-                                <th colspan="4" class="py-2 px-4 border-b border-gray-200">
-                                    Inicio de caja: ${{ $fichaDiaria->inicioCaja }}
+                                <th colspan="8" class="py-2 px-4 border-b border-gray-200">
+                                <div class="flex justify-between items-center">
+                                        <span>Fecha: {{ date("d/m/Y") }}</span>
+                                        <span>
+                                            Inicio de caja: ${{ $fichaDiaria->inicioCaja }}
+                                        </span>
+                                        <div class="flex">
+                                        <a href="{{ route('ventas.finalizar') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                        Finalizar día
+                                    </a>
+                                        <a href="{{ route('ventas.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
+                                            Agregar venta
+                                        </a>
+
+                                      </div>
+                                    </div>
                                 </th>
                             </tr>
                             <tr class="bg-gray-100">
@@ -47,7 +58,7 @@
                                 @endphp
                                 @foreach ($ventas as $venta)
                                     <tr>
-                                        <td class="py-2 px-4 border-b border-gray-200">{{ $venta->detalle }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $venta->detalle }}</td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             ${{ $venta->montoEfectivo }}
                                             @php $totalEfectivo += $venta->montoEfectivo; @endphp
@@ -95,7 +106,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200">Total ventas:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Total ventas:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalEfectivo }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTarjeta }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTransferencia }}</td>
@@ -105,25 +116,25 @@
                                 <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200">Total caja:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Total caja:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200">A pozo:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">A pozo:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $aPozo = $fichaDiaria->aPozo }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200">Caja chica:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Caja chica:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $cajaChica = $totalCaja - $aPozo }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200">Descripción:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Descripción:</td>
                                 <th colspan="7" class="py-2 px-4 border-b border-gray-200">{{ $fichaDiaria->descripcion }}</th>
                             </tr>
-                            <tr class="bg-gray-200">
+                            <!--<tr class="bg-gray-200">
                                 <td colspan="8" class="py-2 px-4 border-b border-gray-200 text-center">
                                     <a href="{{ route('ventas.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Agregar venta
@@ -136,20 +147,23 @@
                                         Finalizar día
                                     </a>
                                 </td>
-                            </tr>                   
+                            </tr>   -->                
                         </tfoot>
+                        
                     </table>
-                    @php
+       
+                @php
                     $fichaDiaria->totalVentas = $totalFinal;
                     $fichaDiaria->totalTela = $totalTela;
                     $fichaDiaria->totalArreglo = $totalArreglo;
                     $fichaDiaria->aPozo = $aPozo;
                     $fichaDiaria->cajaChica = $cajaChica;
                     $fichaDiaria->descripcion = $fichaDiaria->descripcion;
-                    $fichaDiaria->save();
+                    $fichaDiaria->save();    
                 @endphp
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
