@@ -48,19 +48,19 @@
                                 @foreach ($ventas as $venta)
                                     <tr>
                                         <td class="py-2 px-4 border-b border-gray-200">{{ $venta->detalle }}</td>
-                                        <td class="py-2 px-4 border-b border-gray-200">
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             ${{ $venta->montoEfectivo }}
                                             @php $totalEfectivo += $venta->montoEfectivo; @endphp
                                         </td>
-                                        <td class="py-2 px-4 border-b border-gray-200">
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             ${{ $venta->montoTarjeta }}
                                             @php $totalTarjeta += $venta->montoTarjeta; @endphp
                                         </td>
-                                        <td class="py-2 px-4 border-b border-gray-200">
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             ${{ $venta->montoTransferencia }}
                                             @php $totalTransferencia += $venta->montoTransferencia; @endphp
                                         </td>
-                                        <td class="py-2 px-4 border-b border-gray-200">
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             @if ($venta->idTipoProducto == 1)
                                                 ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}
                                                 @php $totalTela += ($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia); @endphp
@@ -68,7 +68,7 @@
                                                 $0
                                             @endif
                                         </td>
-                                        <td class="py-2 px-4 border-b border-gray-200">
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             @if ($venta->idTipoProducto == 2)
                                                 ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}
                                                 @php $totalArreglo += ($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia); @endphp
@@ -88,7 +88,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                                 @php
                                     $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;// + $totalTela + $totalArreglo;
                                 @endphp
@@ -97,27 +96,27 @@
                         <tfoot>
                             <tr class="bg-gray-200">
                                 <td class="py-2 px-4 border-b border-gray-200">Total ventas:</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalEfectivo }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalTarjeta }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalTransferencia }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalTela }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalArreglo }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalFinal }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalEfectivo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTarjeta }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTransferencia }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTela }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalArreglo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalFinal }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
                             <tr class="bg-gray-200">
                                 <td class="py-2 px-4 border-b border-gray-200">Total caja:</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
                                 <td class="py-2 px-4 border-b border-gray-200">A pozo:</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $aPozo = $fichaDiaria->aPozo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $aPozo = $fichaDiaria->aPozo }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
                                 <td class="py-2 px-4 border-b border-gray-200">Caja chica:</td>
-                                <td class="py-2 px-4 border-b border-gray-200">${{ $cajaChica = $totalCaja - $aPozo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $cajaChica = $totalCaja - $aPozo }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
