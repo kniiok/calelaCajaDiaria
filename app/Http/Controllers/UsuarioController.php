@@ -33,7 +33,7 @@ public function store(Request $request)
         ];
         //carga una actividad realizada por el usuario
         $audit = new AuditController();
-        $operacion = 'Alta al usuario '.$userData['nombre'].';  -- '. Carbon::now()->format('H:i');
+        $operacion = 'Alta al usuario '.$userData['name'].';  -- '. Carbon::now()->format('H:i');
         $audit->create($operacion);
         // Insertar el usuario en la base de datos
         DB::table('users')->insert($userData);
