@@ -31,8 +31,8 @@
                 <tbody>
                     @foreach ($auditoriasDelUsuario as $auditoria)
                         <tr>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $auditoria->fecha }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $auditoria->operacion }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ date('d/m/Y', strtotime($auditoria->fecha)) }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $auditoria->operacion }}</td>
                             <!-- Otros campos de auditoría que deseas mostrar -->
                         </tr>
                     @endforeach

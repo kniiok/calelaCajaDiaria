@@ -87,6 +87,9 @@ public function create()
         // Convertir la fecha seleccionada a objeto Carbon para facilitar la manipulación
         $fecha = Carbon::createFromFormat('Y-m-d', $fechaSeleccionada);
 
+        // Formatear la fecha como una cadena legible
+        $fechaFormateada = $fecha->format('d/m/Y');
+
         // Calcular la fecha anterior
         $fechaAnterior = $fecha->subDay()->toDateString();
 

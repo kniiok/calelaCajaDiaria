@@ -15,7 +15,7 @@
                         <thead>
                             <tr class="bg-gray-200">
                                 <th colspan="4" class="py-2 px-4 border-b border-gray-200">
-                                    Fecha: {{ date("d-m-Y") }}
+                                    Fecha: {{ date("d/m/Y") }}
                                 </th>
                                 <th colspan="4" class="py-2 px-4 border-b border-gray-200">
                                     Inicio de caja: ${{ $fichaDiaria->inicioCaja }}
