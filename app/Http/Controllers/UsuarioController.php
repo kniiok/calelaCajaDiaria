@@ -31,14 +31,13 @@ public function store(Request $request)
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now(),
         ];
-        $audit = [
-            'operacion' => 'Alta al usuario '.$userData['nombre'],
-            'user_id'=> auth()->user()->id,
-            'fecha'=> Carbon::now(),
-        ];
+     
+        //carga una actividad realizada por el usuario
+        $audit = new AuditController();
+        $operacion = 'Alta al usuario '.$userData['nombre'].';  -- '. Carbon::now()->format('H:i');
+        $audit->create($operacion);
         // Insertar el usuario en la base de datos
         DB::table('users')->insert($userData);
-        DB::table('audits')->insert($audit);
         // Redireccionar o enviar una respuesta JSON según tus necesidades
         return redirect()->back()->with('success', 'Usuario agregado correctamente');
     }

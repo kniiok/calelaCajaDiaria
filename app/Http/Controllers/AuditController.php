@@ -15,6 +15,7 @@ class AuditController extends Controller
      */
     public function index()
     {
+        if(auth()->user()){
         if (auth()->user()->rol->tipoRol != 'Administrador') {
 
             return redirect()->route('audit.show', ['user' => auth()->user()]);
@@ -24,6 +25,8 @@ class AuditController extends Controller
         return view('audit.audits', compact('users', 'user'));
         // return view('audit.audits');
     }
+    return abort(403, 'Acceso no autorizado');
+}
 
     /**
      * Show the form for creating a new resource.
@@ -51,6 +54,7 @@ class AuditController extends Controller
      */
     public function show(User $user)
     {
+        if(auth()->user()){
         if ($user && auth()->user()->rol->tipoRol == 'Administrador') {
 
          return view('audit.audit', compact( 'user'));
@@ -60,6 +64,7 @@ class AuditController extends Controller
             return view('audit.audit', compact( 'user'));
         
         }
+    }
             return abort(403, 'Acceso no autorizado');
         
         // return redirect()->route('audit.show', ['user' => auth()->user()]);
