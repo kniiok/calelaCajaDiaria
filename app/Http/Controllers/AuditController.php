@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Audit;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AuditController extends Controller
 {
@@ -15,21 +17,25 @@ class AuditController extends Controller
     {
         if (auth()->user()->rol->tipoRol != 'Administrador') {
 
-            return redirect()->route('audit.show', ['user' => auth()->user()->id]);
+            return redirect()->route('audit.show', ['user' => auth()->user()]);
         }
         $users = User::orderBy('name', 'asc')->get();
         $user = auth()->user();
         return view('audit.audits', compact('users', 'user'));
+        // return view('audit.audits');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($operacion)
     {
-        // $tiposProducto = TipoProducto::all();]
-        //$tiposPago = TipoPago::all();
-
+        $audit = [
+            'operacion' => $operacion,
+            'user_id'=> auth()->user()->id,
+            'fecha'=> Carbon::now()
+        ];
+        DB::table('audits')->insert($audit);
     }
 
     /**
@@ -45,13 +51,18 @@ class AuditController extends Controller
      */
     public function show(User $user)
     {
-        if ($user) {
-            $auditoriasDelUsuario = $user->audits;
-            $rol = $user->rol->tipoRol;
-            // dd($auditoriasDelUsuario);
-            return view('audit.audit', compact('auditoriasDelUsuario', 'user', 'rol'));
+        if ($user && auth()->user()->rol->tipoRol == 'Administrador') {
+
+         return view('audit.audit', compact( 'user'));
+
+        }else if(auth()->user()->id == $user->id){
+            
+            return view('audit.audit', compact( 'user'));
+        
         }
-        return redirect()->action([AuditController::class, 'index']);
+            return abort(403, 'Acceso no autorizado');
+        
+        // return redirect()->route('audit.show', ['user' => auth()->user()]);
     }
 
     /**
