@@ -33,7 +33,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $user->rol->tipoRol }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $user->nombre}}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $user->name}}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $user->email}}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $user->created_at->format('d/m/Y H:i:s')}}</td>
                             <td class="py-2 px-4 border-b border-gray-200">@if ($user->estadoUsuario == 1)

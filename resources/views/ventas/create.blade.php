@@ -23,7 +23,7 @@
             <div>
                 <label for="detalle" class="block text-sm font-medium leading-6 text-gray-900">Detalle:</label>
                 <div class="m-1">
-                    <input id="text" name="detalle" id="detalle" autocomplete="nombre" required
+                    <input id="text" name="detalle" id="detalle" autocomplete="name" required
                         class="block w-full rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
@@ -35,18 +35,18 @@
                 </div>
             </div>
             <div>
+                <label for="montoTarjeta" class="block text-sm font-medium leading-6 text-gray-900">Monto Tarjeta:</label>
+                <div class="m-1">
+                    <input type="number" name="montoTarjeta" id="montoTarjeta" step="0.01" min="0" value="0"
+                        class="block w-full rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+            <div>
                 <label for="montoTransferencia" class="block text-sm font-medium leading-6 text-gray-900">Monto
                     Transferencia:</label>
                 <div class="m-1">
                     <input type="number" name="montoTransferencia" id="montoTransferencia" step="0.01" min="0"
                         value="0"
-                        class="block w-full rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                </div>
-            </div>
-            <div>
-                <label for="montoTarjeta" class="block text-sm font-medium leading-6 text-gray-900">Monto Tarjeta:</label>
-                <div class="m-1">
-                    <input type="number" name="montoTarjeta" id="montoTarjeta" step="0.01" min="0" value="0"
                         class="block w-full rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Venta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class FichaDiariaVentaController extends Controller
 {
@@ -35,6 +36,7 @@ class FichaDiariaVentaController extends Controller
     $fichaDiaria = FichaDiaria::whereDate('created_at', $fechaActual)->first();
 
     // Verificar si se encontró la ficha diaria para la fecha actual
+    if(auth()->user()!=null){
     if ($fichaDiaria) {
         $ventas = $fichaDiaria->ventas;
     } else {
@@ -49,6 +51,7 @@ class FichaDiariaVentaController extends Controller
         ]);
 
         $ventas = [];
+    
     }
     // Calcular los totales de ventas por tipo
     $totalEfectivo = $ventas/*->where('idTipoPago', 1)*/->sum('montoEfectivo');
@@ -62,6 +65,9 @@ class FichaDiariaVentaController extends Controller
 
     // Pasar los totales a la vista
     return view('fichaDiaria.index', compact('fichaDiaria', 'ventas', 'totalEfectivo', 'totalTarjeta', 'totalTransferencia', 'totalArreglo', 'totalTela', 'totalFinal'));
+}else{
+    return Redirect::route('login');
+}
 }
 public function create()
 {

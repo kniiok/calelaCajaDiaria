@@ -2,7 +2,7 @@
 @section('content')
 
 <header class="ml-4 pl-4">
-    <h1 class="m-auto p-auto text-xl text-center">Auditorias de usuario {{$user->nombre}}</h1>
+    <h1 class="m-auto p-auto text-xl text-center">Auditorias de usuario {{$user->name}}</h1>
     <p><strong>Rol:</strong> {{$rol}}<br>
         <strong>Email:</strong> {{$user->email}} <br>
         <strong>Estado:</strong>@if ($user->estadoUsuario == 1)
