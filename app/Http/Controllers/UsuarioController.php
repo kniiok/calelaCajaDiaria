@@ -23,7 +23,7 @@ public function store(Request $request)
         // Validar los datos del formulario si es necesario
 
         $userData = [
-            'nombre' => $request->input('nombre'),
+            'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'rol_id' => $request->input('rolUsuario'),
@@ -31,11 +31,11 @@ public function store(Request $request)
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now(),
         ];
-     
-        //carga una actividad realizada por el usuario
-        $audit = new AuditController();
-        $operacion = 'Alta al usuario '.$userData['nombre'].';  -- '. Carbon::now()->format('H:i');
-        $audit->create($operacion);
+        $audit = [
+            'operacion' => 'Alta al usuario '.$userData['nombre'],
+            'user_id'=> auth()->user()->id,
+            'fecha'=> Carbon::now(),
+        ];
         // Insertar el usuario en la base de datos
         DB::table('users')->insert($userData);
         // Redireccionar o enviar una respuesta JSON según tus necesidades

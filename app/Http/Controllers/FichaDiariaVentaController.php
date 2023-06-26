@@ -10,6 +10,7 @@ use App\Models\Venta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class FichaDiariaVentaController extends Controller
 {
@@ -37,43 +38,42 @@ class FichaDiariaVentaController extends Controller
             // Buscar la ficha diaria actual
             $fichaDiaria = FichaDiaria::whereDate('created_at', $fechaActual)->first();
 
-            // Verificar si se encontró la ficha diaria para la fecha actual
-            if ($fichaDiaria) {
-                $ventas = $fichaDiaria->ventas;
-            } else {
-                // Si no se encontró la ficha diaria, crear una nueva
-                $fichaDiaria = FichaDiaria::create([
-                    'idUsuario' => auth()->user()->id,
-                    'inicioCaja' => $inicioCaja,
-                    'totalVentas' => 0,
-                    'aPozo' => 0,
-                    'cajaChica' => 0,
-                    'descripcion' => 'No hay descripción'
-                ]);
+    // Verificar si se encontró la ficha diaria para la fecha actual
+    if ($fichaDiaria) {
+        $ventas = $fichaDiaria->ventas;
+    } else {
+        // Si no se encontró la ficha diaria, crear una nueva
+        $fichaDiaria = FichaDiaria::create([
+            'idUsuario' => auth()->user()->id,
+            'inicioCaja' => $inicioCaja,
+            'totalVentas' => 0,
+            'aPozo' => 0,
+            'cajaChica' => 0,
+            'descripcion' => 'No hay descripción'
+        ]);
 
-                $ventas = [];
-            }
-            // Calcular los totales de ventas por tipo
-            $totalEfectivo = $ventas/*->where('idTipoPago', 1)*/->sum('montoEfectivo');
-            $totalTarjeta = $ventas/*->where('idTipoPago', 2)*/->sum('montoTarjeta');
-            $totalTransferencia = $ventas/*->where('idTipoPago', 3)*/->sum('montoTransferencia');
-            $totalArreglo = $ventas->where('idTipoProducto', 1)->sum('montoEfectivo', 'montoTarjeta', 'montoTransferencia');
-            $totalTela = $ventas->where('idTipoProducto', 2)->sum('montoEfectivo', 'montoTarjeta', 'montoTransferencia');
+        $ventas = [];
+    }
+    // Calcular los totales de ventas por tipo
+    $totalEfectivo = $ventas/*->where('idTipoPago', 1)*/->sum('montoEfectivo');
+    $totalTarjeta = $ventas/*->where('idTipoPago', 2)*/->sum('montoTarjeta');
+    $totalTransferencia = $ventas/*->where('idTipoPago', 3)*/->sum('montoTransferencia');
+    $totalArreglo = $ventas->where('idTipoProducto', 1)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
+    $totalTela = $ventas->where('idTipoProducto', 2)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
 
             // Calcular el total final
             $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
 
-            // Pasar los totales a la vista
-            return view('fichaDiaria.index', compact('fichaDiaria', 'ventas', 'totalEfectivo', 'totalTarjeta', 'totalTransferencia', 'totalArreglo', 'totalTela', 'totalFinal'));
-        }
-        return redirect('/login');
+    // Pasar los totales a la vista
+    return view('fichaDiaria.index', compact('fichaDiaria', 'ventas', 'totalEfectivo', 'totalTarjeta', 'totalTransferencia', 'totalArreglo', 'totalTela', 'totalFinal'));
+}
     }
-    public function create()
-    {
-        $tiposProducto = TipoProducto::all();
-        //$tiposPago = TipoPago::all();
-        return view('ventas.create', compact('tiposProducto'));
-    }
+public function create()
+{
+    $tiposProducto = TipoProducto::all();
+    //$tiposPago = TipoPago::all();
+    return view('ventas.create', compact('tiposProducto'));
+}
 
     public function buscar(Request $request)
     {

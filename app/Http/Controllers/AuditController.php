@@ -20,7 +20,7 @@ class AuditController extends Controller
 
             return redirect()->route('audit.show', ['user' => auth()->user()]);
         }
-        $users = User::orderBy('nombre', 'asc')->get();
+        $users = User::orderBy('name', 'asc')->get();
         $user = auth()->user();
         return view('audit.audits', compact('users', 'user'));
         // return view('audit.audits');

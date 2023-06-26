@@ -17,7 +17,7 @@ class AuditIndex extends Component
     }
     public function render()
     { 
-        $users = User::where('nombre','LIKE' ,'%'.$this->search.'%')
+        $users = User::where('name','LIKE' ,'%'.$this->search.'%')
         ->orWhere('email','LIKE' ,'%'.$this->search.'%')
         ->orWhere('estadoUsuario','LIKE' ,'%'.$this->search.'%')
         ->orWhere('created_at','LIKE' ,'%'.$this->search.'%')

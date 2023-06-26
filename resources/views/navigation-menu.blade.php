@@ -157,7 +157,7 @@
                             <!-- Authentication -->
 <div class="flex items-center justify-end">
     @if (Auth::check())
-    <span>{{ Auth::user()->nombre }}</span>
+    <span>{{ Auth::user()->name }}</span>
 @else
     @php
         return redirect()->route('login');

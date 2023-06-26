@@ -22,7 +22,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $user->id }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200">{{ $user->nombre }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200">{{ $user->name }}</td>
                             <!-- Otros campos de usuario que deseas mostrar -->
                         </tr>
                     @endforeach

@@ -25,7 +25,7 @@
                        @foreach ($users as $user)
                            <tr>
                                <td class="py-2 px-4 border-b">{{ $user->rol->tipoRol }}</td>
-                               <td class="py-2 px-4 border-b">{{ $user->nombre }}</td>
+                               <td class="py-2 px-4 border-b">{{ $user->name }}</td>
                                <td class="py-2 px-4 border-b">{{ $user->email }}</td>
                                <td class="py-2 px-4 border-b">{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
                                <td class="py-2 px-4 border-b">
