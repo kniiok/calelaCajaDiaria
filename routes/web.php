@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
         })->name('usuarios.insert');
     });
 });
-
+Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.user');
 Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiariaHoy'])->name('fichadiaria.hoy');
 Route::get('/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
 Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');

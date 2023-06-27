@@ -32,7 +32,7 @@ class AuditShow extends Component
         if ($this->user) { 
             $auditoriasDelUsuario = Audit::where('user_id',$this->user->id)->whereHas('user', function ($query) use ($search) {
                 $query->where('fecha', 'like', '%' . $search . '%')->orWhere('operacion','LIKE' ,'%'.$this->search.'%');
-            })->orderBy('fecha', 'desc')->paginate(10);
+            })->orderBy('id', 'desc')->paginate(10);
             
             $rol = $this->user->rol->tipoRol;
             return view('livewire.audit-show', compact('auditoriasDelUsuario', 'user','rol'));

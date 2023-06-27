@@ -91,7 +91,7 @@
                                             @endif
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200"></td>
-                                        <td class="py-2 px-4 border-b border-gray-200">
+                                        <td class="py-2 px-4 border-b border-gray-200" width='10px'>
                                             <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" onsubmit="return confirm('¿Realmente deseas eliminar la venta {{$venta->detalle}} de valor {{$venta->montoEfectivo+$venta->MontoTarjeta+$venta->MontoTransferencia}}?');">
                                                 @csrf
                                                 @method('DELETE')
