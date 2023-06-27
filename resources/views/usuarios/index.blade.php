@@ -25,7 +25,7 @@
                             <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $user->id }}</td>
                             <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $user->name }}</td>
                             <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">
-                                <form action="{{ route('usuarios.eliminar', $user->id) }}" method="POST">
+                                <form action="{{ route('usuarios.eliminar', $user->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar al usuario {{$user->id}}: {{$user->name}}?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Eliminar usuario</button>

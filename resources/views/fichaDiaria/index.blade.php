@@ -89,7 +89,7 @@
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200"></td>
                                         <td class="py-2 px-4 border-b border-gray-200">
-                                            <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST">
+                                            <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" onsubmit="return confirm('¿Realmente deseas eliminar la venta {{$venta->detalle}} de valor {{$venta->montoEfectivo+$venta->MontoTarjeta+$venta->MontoTransferencia}}?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -100,7 +100,7 @@
                                     </tr>
                                 @endforeach
                                 @php
-                                    $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;// + $totalTela + $totalArreglo;
+                                    $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
                                 @endphp
                             @endif
                         </tbody>
@@ -133,21 +133,7 @@
                             <tr class="bg-gray-200">
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Descripción:</td>
                                 <th colspan="7" class="py-2 px-4 border-b border-gray-200">{{ $fichaDiaria->descripcion }}</th>
-                            </tr>
-                            <!--<tr class="bg-gray-200">
-                                <td colspan="8" class="py-2 px-4 border-b border-gray-200 text-center">
-                                    <a href="{{ route('ventas.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        Agregar venta
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="bg-gray-200">
-                                <td colspan="8" class="py-2 px-4 border-b border-gray-200 text-center">
-                                    <a href="{{ route('ventas.finalizar') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                        Finalizar día
-                                    </a>
-                                </td>
-                            </tr>   -->                
+                            </tr>            
                         </tfoot>
                         
                     </table>

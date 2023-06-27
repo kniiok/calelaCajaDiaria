@@ -162,7 +162,6 @@ public function create()
     // Validar los datos del formulario
     $request->validate([
         'aPozo' => 'required',
-        'descripcion' => 'required',
     ]);
 
     // Actualizar los valores de aPozo y descripción en la ficha diaria actual
@@ -170,7 +169,9 @@ public function create()
     $fichaDiaria->save();
 
     // Actualizar la descripción en la ficha diaria actual
-    $fichaDiaria->descripcion = $request->descripcion;
+    if(!isset($fichaDiaria->descripcion)){
+        $fichaDiaria->descripcion = "No hay descrición";
+    }
     $fichaDiaria->save();
 
     //carga una actividad realizada por el usuario
