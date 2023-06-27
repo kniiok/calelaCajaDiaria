@@ -38,7 +38,7 @@ public function store(Request $request)
         // Insertar el usuario en la base de datos
         DB::table('users')->insert($userData);
         // Redireccionar o enviar una respuesta JSON según tus necesidades
-        return redirect()->back()->with('success', 'Usuario agregado correctamente');
+        return redirect('/usuarios')->with('success', 'Usuario agregado correctamente');
     }
     public function destroy($id)
     {

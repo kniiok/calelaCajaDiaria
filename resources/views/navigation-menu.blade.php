@@ -30,11 +30,14 @@
                         {{ __('Buscar Fichas') }}
                     </x-nav-link>
 
+                    <?php /* PARA MAS ADELANTE!!!!
                     @if(auth()->check() && auth()->user()->rol_id === 1)
                         <x-nav-link href="{{-- {{route('fichas.buscar')}}" :active="request()->routeIs('buscar-fichas') --}}">
                             {{ __('Estadísticas') }}
                         </x-nav-link>
                     @endif
+                    */ ?>
+
                     {{-- @if(auth()->check() && auth()->user()->rol_id === 1) --}}
                     <x-nav-link href="{{route('audit.index')}}" :active="request()->routeIs('buscar')">
                         {{ __('Auditorias') }}

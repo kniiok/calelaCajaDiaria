@@ -60,11 +60,13 @@ Route::post('/logout', function () {
 Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => ['rol_id:1']], function () {
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-        Route::get('/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
+        Route::get('/agregarr', [UsuarioController::class, 'store'])->name('usuarios.store');
         Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
         Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
         Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.eliminar');
-
+        Route::get('/agregar', function () {
+            return view('usuarios/insert');
+        })->name('usuarios.insert');
     });
 });
 
@@ -77,6 +79,3 @@ Route::delete('/ventas/{venta}', [FichaDiariaVentaController::class, 'destroy'])
 Route::get(('/buscar'), function (){
     return view('buscarFicha.index');})->name('fichas.buscar');
 Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');
-Route::get('/usuarios/agregar', function () {
-    return view('usuarios/insert');
-})->name('usuarios.insert');

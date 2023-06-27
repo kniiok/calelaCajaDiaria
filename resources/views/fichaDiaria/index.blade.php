@@ -6,12 +6,15 @@
             {{ __('Caja') }}
         </h2>
     </x-slot>
+    <head>
+        <link href="css/animate.min.css" rel="stylesheet">
+    </head>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="w-full border-solid border bg-white">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg animate__animated animate__fadeIn">
+                <div class="overflow-x-auto animate__animated animate__fadeIn">
+                    <table class="w-full border-solid border bg-white animate__animated animate__fadeIn">
                         <thead>
                             <tr class="bg-gray-200">
                                 <th colspan="8" class="py-2 px-4 border-b border-gray-200">

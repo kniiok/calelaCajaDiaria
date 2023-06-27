@@ -1,36 +1,36 @@
 @extends('layouts.app')
+
 @section('content')
-    <div class="block mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+
+<head>
+    <link href="css/animate.min.css" rel="stylesheet">
+</head>
+
+    <div class="block mt-5 sm:mx-auto sm:w-full sm:max-w-sm animate__animated animate__fadeIn">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Buscador de ficha</h2>
+            <h2 class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 animate__animated animate__fadeIn">Buscador de ficha</h2>
         </div>
-        <form action="{{ route('fichas.buscada') }}" method="get" class="my-4">
+        <form action="{{ route('fichas.buscada') }}" method="get" class="my-4 animate__animated animate__fadeIn">
             @csrf
             <div>
-                <label for="detalle" class="block text-sm font-medium leading-6 text-gray-900">Buscar ficha por
-                    fecha:</label>
+                <label for="detalle" class="block text-sm font-medium leading-6 text-gray-900">Buscar ficha por fecha:</label>
                 <div class="m-1">
-                    <input type="date" name="fecha" id="fecha" required
-                        class="block w-full rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="date" name="fecha" id="fecha" required class="block w-full rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 animate__animated animate__fadeIn">
                 </div>
             </div>
             <div>
-                <button type="submit"
-                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Buscar</button>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 animate__animated animate__fadeIn">Buscar</button>
             </div>
         </form>
     </div>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Caja') }}
-        </h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight animate__animated animate__fadeIn"> {{ __('Caja') }}</h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg animate__animated animate__fadeIn">
                 @if (isset($fecha))
                     <table class="w-full border-solid border bg-white">
                         <tr class="bg-gray-200">

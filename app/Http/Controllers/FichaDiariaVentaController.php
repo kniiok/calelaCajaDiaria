@@ -182,20 +182,6 @@ public function create()
     // Redireccionar a la vista fichaDiaria.index
     return redirect()->route('fichadiaria.hoy')->with('success', 'Día finalizado exitosamente');
 }
-
-
-    /*public function buscar(Request $request){
-    SELECT tp.tipo, sum(t.montoEfectivo)as efectivo, sum(t.montoTarjeta) as tarjeta, 
-       sum(t.montoTransferencia) as transferencia 
-FROM `ventas` as t
-inner join `tipoproductos` as tp on (tp.id = t.idTipoProducto)
-WHERE t.fecha = date('2023-06-19')
-group by tp.tipo
-order by t.created_at;
-select sum(t.montoEfectivo+t.montoTarjeta+t.montoTransferencia) as sumaTotal
-from `ventas` as t
-WHERE t.fecha = date('2023-06-19');
-}  */
     public function destroy(Venta $venta)
     {
         date_default_timezone_set('America/Argentina/Buenos_Aires');
