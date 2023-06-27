@@ -66,6 +66,8 @@ class FichaDiariaVentaController extends Controller
 
     // Pasar los totales a la vista
     return view('fichaDiaria.index', compact('fichaDiaria', 'ventas', 'totalEfectivo', 'totalTarjeta', 'totalTransferencia', 'totalArreglo', 'totalTela', 'totalFinal'));
+}else{
+    return Redirect::route('login');
 }
     }
 public function create()
