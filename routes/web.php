@@ -6,20 +6,6 @@ use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FichaDiariaVentaController;
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// routes/web.php
 Route::redirect('/', '/fichadiaria');
 
 
@@ -30,26 +16,6 @@ Route::get('/fichadiaria', function () {
         return redirect()->route('login');
     }
 });
-
-
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return redirect()->route('fichas.buscar');
-//     });
-// });
 
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::post('/logout', function () {
@@ -69,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
         })->name('usuarios.insert');
     });
 });
-Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.user');
+Route::get('/auditoria/usuario/{user}', [AuditController::class, 'show'])->name('audit.user');
 Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiariaHoy'])->name('fichadiaria.hoy');
 Route::get('/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
 Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');
