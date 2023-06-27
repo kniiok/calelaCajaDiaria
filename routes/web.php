@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/agregar/confirmar', [UsuarioController::class, 'store'])->name('usuarios.store');
         Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
         Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
+        Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.eliminar');
 
     });
 });

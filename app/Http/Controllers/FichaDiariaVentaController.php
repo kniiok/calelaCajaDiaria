@@ -153,30 +153,35 @@ public function create()
     }
 
     public function finalizarDia(Request $request)
-    {
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
+{
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-        // Obtener la ficha diaria actual
-        $fichaDiaria = FichaDiaria::whereDate('created_at', Carbon::today())->first();
+    // Obtener la ficha diaria actual
+    $fichaDiaria = FichaDiaria::whereDate('created_at', Carbon::today())->first();
 
-        // Validar los datos del formulario
-        $request->validate([
-            'aPozo' => 'required',
-            'descripcion' => 'required',
-        ]);
+    // Validar los datos del formulario
+    $request->validate([
+        'aPozo' => 'required',
+        'descripcion' => 'required',
+    ]);
 
-        // Actualizar los valores de aPozo y descripción en la ficha diaria actual
-        $fichaDiaria->aPozo = $request->aPozo;
-        $fichaDiaria->descripcion = $request->descripcion;
-        $fichaDiaria->save();
+    // Actualizar los valores de aPozo y descripción en la ficha diaria actual
+    $fichaDiaria->aPozo = $request->aPozo;
+    $fichaDiaria->save();
 
-        //carga una actividad realizada por el usuario
-        $audit = new AuditController();
-        $operacion = 'Finalizo dia el Usuario '.auth()->user()->nombre.'; Descripción: '.$fichaDiaria->descripcion.';  -- '. Carbon::now()->format('H:i');
-        $audit->create($operacion);
-        // Redireccionar a la vista fichaDiaria.index
-        return redirect()->route('fichadiaria.hoy')->with('success', 'Día finalizado exitosamente');
-    }
+    // Actualizar la descripción en la ficha diaria actual
+    $fichaDiaria->descripcion = $request->descripcion;
+    $fichaDiaria->save();
+
+    //carga una actividad realizada por el usuario
+    $audit = new AuditController();
+    $operacion = 'Finalizo dia el Usuario '.auth()->user()->nombre.'; Descripción: '.$fichaDiaria->descripcion.';  - '. Carbon::now()->format('H:i');
+    $audit->create($operacion);
+
+    // Redireccionar a la vista fichaDiaria.index
+    return redirect()->route('fichadiaria.hoy')->with('success', 'Día finalizado exitosamente');
+}
+
 
     /*public function buscar(Request $request){
     SELECT tp.tipo, sum(t.montoEfectivo)as efectivo, sum(t.montoTarjeta) as tarjeta, 

@@ -40,4 +40,22 @@ public function store(Request $request)
         // Redireccionar o enviar una respuesta JSON según tus necesidades
         return redirect()->back()->with('success', 'Usuario agregado correctamente');
     }
+    public function destroy($id)
+    {
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+        // Encontrar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        //carga una actividad realizada por el usuario
+        $audit = new AuditController();
+        $operacion = 'Eliminó al usuario '.$usuario->name.'; - '. Carbon::now()->format('H:i');
+        $audit->create($operacion);
+
+        // Eliminar el usuario
+        $usuario->delete();
+
+        // Redireccionar a la vista de usuarios con un mensaje de éxito
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente');
+    }
 }
