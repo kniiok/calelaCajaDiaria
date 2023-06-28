@@ -48,6 +48,11 @@
                         {{ __('Auditorias') }}
                     </x-nav-link>
                     @endif
+
+                    <x-nav-link href="{{ route('ideas.index') }}" :active="request()->routeIs('ideas')">
+                        {{ __('Ideas') }}
+                    </x-nav-link>
+                    
                 </div>
             </div>
 
