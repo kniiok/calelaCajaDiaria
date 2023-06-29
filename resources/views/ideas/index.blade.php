@@ -43,7 +43,7 @@
             <td class="py-2 px-4 border-b border-gray-200">{{ $idea->descripcion }}</td>
             <td class="py-2 px-4 border-b border-gray-200">{{ date('d/m/Y', strtotime($idea->fecha)) }}</td>
             <td class="py-2 px-4 border-b border-gray-200">
-                <form action="{{ route('ideas.destroy', $idea->id) }}" method="POST" onsubmit="return confirm('¿Realmente deseas eliminar esta idea?');">
+                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post" onsubmit="return confirm('¿Realmente deseas eliminar esta idea?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

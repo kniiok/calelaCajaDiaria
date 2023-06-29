@@ -41,6 +41,14 @@ class FichaDiariaVentaController extends Controller
     // Verificar si se encontró la ficha diaria para la fecha actual
     if ($fichaDiaria) {
         $ventas = $fichaDiaria->ventas;
+        // Calcular los totales de ventas por tipo
+        $totalEfectivo = $ventas/*->where('idTipoPago', 1)*/->sum('montoEfectivo');
+        $totalTarjeta = $ventas/*->where('idTipoPago', 2)*/->sum('montoTarjeta');
+        $totalTransferencia = $ventas/*->where('idTipoPago', 3)*/->sum('montoTransferencia');
+        $totalArreglo = $ventas->where('idTipoProducto', 1)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
+        $totalTela = $ventas->where('idTipoProducto', 2)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
+        // Calcular el total final
+        $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
     } else {
         // Si no se encontró la ficha diaria, crear una nueva
         $fichaDiaria = FichaDiaria::create([
@@ -51,18 +59,16 @@ class FichaDiariaVentaController extends Controller
             'cajaChica' => 0,
             'descripcion' => 'No hay descripción'
         ]);
-
+        $totalEfectivo = 0;
+        $totalTarjeta = 0;
+        $totalTransferencia = 0;
+        $totalArreglo = 0;
+        $totalTela = 0;
+        // Calcular el total final
+        $totalFinal = 0;
         $ventas = [];
     }
-    // Calcular los totales de ventas por tipo
-    $totalEfectivo = $ventas/*->where('idTipoPago', 1)*/->sum('montoEfectivo');
-    $totalTarjeta = $ventas/*->where('idTipoPago', 2)*/->sum('montoTarjeta');
-    $totalTransferencia = $ventas/*->where('idTipoPago', 3)*/->sum('montoTransferencia');
-    $totalArreglo = $ventas->where('idTipoProducto', 1)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
-    $totalTela = $ventas->where('idTipoProducto', 2)->sum('montoEfectivo','montoTarjeta','montoTransferencia');
-
-            // Calcular el total final
-            $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
+    
 
     // Pasar los totales a la vista
     return view('fichaDiaria.index', compact('fichaDiaria', 'ventas', 'totalEfectivo', 'totalTarjeta', 'totalTransferencia', 'totalArreglo', 'totalTela', 'totalFinal'));

@@ -38,6 +38,6 @@ public function destroy($id)
         // Eliminar la idea
         $idea->delete();
 
-        return redirect()->back()->with('success', 'La idea ha sido eliminada correctamente.');
+        return redirect('/ideas')->with('success', 'La idea ha sido eliminada correctamente.');
     }
 }

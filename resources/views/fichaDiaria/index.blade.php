@@ -47,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($ventas->isEmpty())
+                            @if($ventas==[])
                                 <tr>
                                     <th class="py-2 px-4 border-b border-gray-200" colspan="8">No hay ventas</th>
                                 </tr>
