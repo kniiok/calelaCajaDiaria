@@ -50,3 +50,9 @@ Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fic
 Route::get('/ideas', [IdeasController::class, 'show'])->name('ideas.index');
 Route::post('/ideas/store', [IdeasController::class, 'store'])->name('ideas.store');
 Route::delete('/ideas/{id}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
+Route::get('/realizar-respaldo', function () {
+    $command = 'start /MIN cmd.exe /C "C:\xampp\mysql\bin\mysqldump.exe -u root calela > D:\OneDrive\Escritorio\database.sql"';
+    pclose(popen($command, 'r'));
+    
+    return Redirect(route('fichadiaria.hoy'));
+});

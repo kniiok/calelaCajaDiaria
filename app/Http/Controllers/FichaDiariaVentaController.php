@@ -166,12 +166,9 @@ public function create()
 
     // Actualizar los valores de aPozo y descripción en la ficha diaria actual
     $fichaDiaria->aPozo = $request->aPozo;
-    $fichaDiaria->save();
-
     // Actualizar la descripción en la ficha diaria actual
-    if(!isset($fichaDiaria->descripcion)){
-        $fichaDiaria->descripcion = "No hay descrición";
-    }
+    $fichaDiaria->descripcion = $request->descripcion;
+    //Guardar
     $fichaDiaria->save();
 
     //carga una actividad realizada por el usuario
@@ -180,7 +177,7 @@ public function create()
     $audit->create($operacion);
 
     // Redireccionar a la vista fichaDiaria.index
-    return redirect()->route('fichadiaria.hoy')->with('success', 'Día finalizado exitosamente');
+    return redirect('/realizar-respaldo')->with('success', 'Día finalizado exitosamente');
 }
     public function destroy(Venta $venta)
     {

@@ -24,9 +24,11 @@
     <div>
       <label for="descripcionInput" class="block text-sm font-medium leading-6 text-gray-900 animate__animated animate__fadeIn">Descripción:</label>
       <div class="m-1">
-          <input id="descripcionInput" name="descripcion" placeholder="Descripción"
-              class="block w-full mb-8 rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 animate__animated animate__fadeIn">
+        <input id="descripcionInput" name="descripcion" placeholder="Descripción"
+          value="No hay descripción"
+          class="block w-full mb-8 rounded-md border-0 p-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 animate__animated animate__fadeIn">
       </div>
+      
   </div>
     <div>
       <button type="submit"
