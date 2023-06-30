@@ -20,8 +20,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RolSeeder::class);
-        $this->call(EstadoSeeder::class);
         $this->call(UserSeeder::class);
-        Audit::factory(20)->create();
+        // Audit::factory(20)->create();
     }
 }

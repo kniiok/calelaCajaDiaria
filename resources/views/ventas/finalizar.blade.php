@@ -8,7 +8,7 @@
 <div hidden>
 {{$montoEfectivo=0}} 
 @for($i=0;$i<count($ventas);$i++)
-  {{$montoEfectivo += $ventas[$i]['montoEfectivo'];}}
+  {{$montoEfectivo += $ventas[$i]['montoEfectivo']}}
 @endfor
 </div>
 

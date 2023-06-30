@@ -7,12 +7,6 @@
         <h1 class="m-auto p-auto text-xl text-center">Auditorias de usuario {{ $user->nombre }}</h1>
         <p><strong>Rol:</strong> {{ $rol }}<br>
             <strong>Email:</strong> {{ $user->email }} <br>
-            <strong>Estado:</strong>
-            @if ($user->estadoUsuario == 1)
-                <span class="text-green-700 ">Activo</span>
-            @else
-                <span class="text-red-600">Inactivo</span>
-            @endif
             <br>
         </p>
     </header>

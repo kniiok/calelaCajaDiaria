@@ -27,7 +27,6 @@ public function store(Request $request)
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'rol_id' => $request->input('rolUsuario'),
-            'estadoUsuario' => $request->input('estadoUsuario'),
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now(),
         ];

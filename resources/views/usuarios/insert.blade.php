@@ -47,18 +47,19 @@
             </div>
         </div>
 
-        <div>
+        {{--<div>
             <label for="rolUsuario" class="block text-sm font-medium leading-6 text-gray-900">Estado del
                 usuario:</label>
-            <div class="m-auto inline-flex">
+             <div class="m-auto inline-flex">
                 <input type="radio" id="estadoUsuario" name="estadoUsuario" value="1"
                     class="form-radio h-4 w-4 text-indigo-600 m-auto p-2 animate__animated animate__fadeIn">
                 <label for="activo" class="m-auto p-2  text-sm font-medium leading-6 text-gray-900 animate__animated animate__fadeIn">Activo</label>
                 <input type="radio" id="estadoUsuario" name="estadoUsuario" value="2"
                     class="form-radio h-4 w-4 text-indigo-600  m-auto p-2 animate__animated animate__fadeIn">
                 <label for="inactivo" class="m-auto p-2  text-sm font-medium leading-6 text-gray-900 animate__animated animate__fadeIn">Inactivo</label>
-            </div>
-        </div>
+            </div> 
+        </div> --}}
+        <br>
         <div>
             <button type="submit"
                 class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 animate__animated animate__fadeIn">Agregar

@@ -19,7 +19,6 @@
                     <th class="py-2 px-4 border-b border-gray-200">Nombre usuario</th>
                     <th class="py-2 px-4 border-b border-gray-200">Email</th>
                     <th class="py-2 px-4 border-b border-gray-200">Fecha Alta</th>
-                    <th class="py-2 px-4 border-b border-gray-200">Estado</th>
                     <th class="py-2 px-4 border-b border-gray-200"></th>
                 </tr>
             </thead>
@@ -30,13 +29,7 @@
                     <td class="py-2 px-4 border-b">{{ $user->name }}</td>
                     <td class="py-2 px-4 border-b">{{ $user->email }}</td>
                     <td class="py-2 px-4 border-b">{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
-                    <td class="py-2 px-4 border-b">
-                        @if ($user->estadoUsuario == 1)
-                        <span class="text-green-700 ">Activo</span>
-                        @else
-                        <span class="text-red-600">Inactivo</span>
-                        @endif
-                    </td>
+                    <td class="py-2 px-4 border-b"></td>
                     <td width='10px'> <a
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             href="{{ route('audit.show', $user->id) }}">

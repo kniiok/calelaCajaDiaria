@@ -135,7 +135,7 @@ public function create()
         $audit = new AuditController();
         $tipoProducto = TipoProducto::find($request->idTipoProducto);
         $total = $request->montoTransferencia + $request->montoTarjeta + $request->montoEfectivo;
-        $operacion = 'Registro de venta N° ' . $venta->id . '; Detalle: ' . $venta->detalle . ' - Por producto tipo: ' . $tipoProducto->tipo . '; por un valor total: $' . number_format($total, 0, ',', '.') . ';  - ' . Carbon::now()->format('H:i');
+        $operacion = 'Registro de venta N° ' . $venta->id . '; Detalle: ' . $venta->detalle . ' - Producto: ' . $tipoProducto->tipo . '; Valor total: $' . number_format($total, 0, ',', '.') . ';  - ' . Carbon::now()->format('H:i');
         $audit->create($operacion);
 
         // Redireccionar a la vista fichaDiaria.index

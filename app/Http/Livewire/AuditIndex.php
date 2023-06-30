@@ -19,7 +19,6 @@ class AuditIndex extends Component
     { 
         $users = User::where('name','LIKE' ,'%'.$this->search.'%')
         ->orWhere('email','LIKE' ,'%'.$this->search.'%')
-        ->orWhere('estadoUsuario','LIKE' ,'%'.$this->search.'%')
         ->orWhere('created_at','LIKE' ,'%'.$this->search.'%')
         ->paginate(10);
         return view('livewire.audit-index', compact('users'));

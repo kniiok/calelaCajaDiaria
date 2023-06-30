@@ -30,14 +30,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
         Route::get('/agregarr', [UsuarioController::class, 'store'])->name('usuarios.store');
         Route::get('/auditorias', [AuditController::class, 'index'])->name('audit.index');
-        Route::get('/auditoria/{user}', [AuditController::class, 'show'])->name('audit.show');
+        Route::get('/auditorias{user}', [AuditController::class, 'show'])->name('audit.show');
         Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.eliminar');
         Route::get('/agregar', function () {
             return view('usuarios/insert');
         })->name('usuarios.insert');
     });
 });
-Route::get('/auditoria/usuario/{user}', [AuditController::class, 'show'])->name('audit.user');
+Route::get('/auditoriausuario{user}', [AuditController::class, 'show'])->name('audit.user');
 Route::get('/fichadiaria', [FichaDiariaVentaController::class, 'mostrarFichaDiariaHoy'])->name('fichadiaria.hoy');
 Route::get('/create', [FichaDiariaVentaController::class, 'create'])->name('ventas.create');
 Route::post('/ventas', [FichaDiariaVentaController::class, 'store'])->name('ventas.store');

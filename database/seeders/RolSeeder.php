@@ -19,7 +19,7 @@ class RolSeeder extends Seeder
         ]);
 
         Rol::create([
-            'tipoRol' => 'Usuario',
+            'tipoRol' => 'Vendedor',
         ]);
     }
 }
