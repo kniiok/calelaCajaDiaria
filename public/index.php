@@ -1,8 +1,20 @@
+
 <?php
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calela Ficha Diaria</title>
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+</head>
+
+<?php
 define('LARAVEL_START', microtime(true));
 
 /*
