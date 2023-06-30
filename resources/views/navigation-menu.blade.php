@@ -173,13 +173,27 @@
                             <!-- Authentication -->
 <div class="flex items-center justify-end">
     @if (Auth::check())
-    <span>{{ Auth::user()->name }}</span>
+    @php
+        $hour = date('H');
+        $greeting = '';
+
+        if ($hour >= 0 && $hour < 12) {
+            $greeting = '¡Buen día';
+        } elseif ($hour >= 12 && $hour < 18) {
+            $greeting = '¡Buenas tardes';
+        } else {
+            $greeting = '¡Hasta mañana';
+        }
+    @endphp
+
+    <span>{{ $greeting }} {{ Auth::user()->name }}!</span>
 @else
     @php
         return redirect()->route('login');
         exit;
     @endphp
 @endif
+
 
     <form method="POST" action="{{ route('logout') }}" x-data>
         @csrf

@@ -55,7 +55,7 @@
         @endforeach
                     @else
                     <tr>
-                        <td colspan="2" class="py-2 px-4 border-b border-gray-200 text-center">No hay ideas</td>
+                        <td colspan="2" class="py-2 px-4 border-b border-gray-200 text-center" style="text-align:left;">No hay ideas</td>
                     </tr>
                     @endif
                 </tbody>
