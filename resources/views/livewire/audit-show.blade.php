@@ -1,4 +1,7 @@
-<div>
+<head>
+    <link href="css/animate.min.css" rel="stylesheet">
+</head>
+<div class="animate__animated animate__fadeIn">
     {{-- datos del usuario a auditar --}}
     <header class="ml-4 pl-4">
         <h1 class="m-auto p-auto text-xl text-center">Auditorias de usuario {{ $user->nombre }}</h1>

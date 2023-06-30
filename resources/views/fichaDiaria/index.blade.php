@@ -21,7 +21,8 @@
                                 <div class="flex justify-between items-center">
                                         <span>Fecha: {{ date("d/m/Y") }}</span>
                                         <span>
-                                            Inicio de caja: ${{ $fichaDiaria->inicioCaja }}
+                                            
+                                            Inicio de caja: ${{ number_format($fichaDiaria->inicioCaja, 2, ',', '.') }}
                                         </span>
                                         <div class="flex">
                                         <a href="{{ route('ventas.finalizar') }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -36,14 +37,14 @@
                                 </th>
                             </tr>
                             <tr class="bg-gray-100">
-                                <th class="py-2 px-4 border-b border-gray-200">Detalle</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Efectivo</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Tarjeta</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Transf/MP</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Tela</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Arreglo</th>
-                                <th class="py-2 px-4 border-b border-gray-200">Total final</th>
-                                <th class="py-2 px-4 border-b border-gray-200"></th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Detalle</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Efectivo</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Tarjeta</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Transf/MP</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Tela</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Arreglo</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Total final</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,42 +62,42 @@
                                 @endphp
                                 @foreach ($ventas as $venta)
                                     <tr>
-                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $venta->detalle }}</td>
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">{{ $venta->detalle }}</td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
-                                            ${{ $venta->montoEfectivo }}
+                                            ${{ number_format($venta->montoEfectivo, 2, ',', '.') }}
                                             @php $totalEfectivo += $venta->montoEfectivo; @endphp
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
-                                            ${{ $venta->montoTarjeta }}
+                                            ${{ number_format($venta->montoTarjeta, 2, ',', '.') }}
                                             @php $totalTarjeta += $venta->montoTarjeta; @endphp
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
-                                            ${{ $venta->montoTransferencia }}
+                                            ${{ number_format($venta->montoTransferencia, 2, ',', '.') }}
                                             @php $totalTransferencia += $venta->montoTransferencia; @endphp
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             @if ($venta->idTipoProducto == 1)
-                                                ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}
+                                                ${{ number_format($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia, 2, ',', '.') }}
                                                 @php $totalTela += ($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia); @endphp
                                             @else
-                                                $0
+                                                $0,00
                                             @endif
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             @if ($venta->idTipoProducto == 2)
-                                                ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}
+                                                ${{ number_format($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia, 2, ',', '.') }}
                                                 @php $totalArreglo += ($venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia); @endphp
                                             @else
-                                                $0
+                                                $0,00
                                             @endif
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200"></td>
-                                        <td class="py-2 px-4 border-b border-gray-200" width='10px'>
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
                                             <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" onsubmit="return confirm('¿Realmente deseas eliminar la venta {{$venta->detalle}} de valor {{$venta->montoEfectivo+$venta->MontoTarjeta+$venta->MontoTransferencia}}?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                    Eliminar
+                                                    X
                                                 </button>
                                             </form>
                                         </td>
@@ -109,33 +110,33 @@
                         </tbody>
                         <tfoot>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Total ventas:</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalEfectivo }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTarjeta }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTransferencia }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTela }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalArreglo }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalFinal }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Total ventas:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalEfectivo, 2, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalTarjeta, 2, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalTransferencia, 2, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalTela, 2, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalArreglo, 2, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalFinal, 2, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Total caja:</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Total caja:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja, 2, ',', '.') }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">A pozo:</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $aPozo = $fichaDiaria->aPozo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">A pozo:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($aPozo = $fichaDiaria->aPozo, 2, ',', '.') }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Caja chica:</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $cajaChica = $totalCaja - $aPozo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Caja chica:</td>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($cajaChica = $totalCaja - $aPozo, 2, ',', '.') }}</td>
                                 <td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Descripción:</td>
-                                <th colspan="7" class="py-2 px-4 border-b border-gray-200">{{ $fichaDiaria->descripcion }}</th>
+                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Descripción:</td>
+                                <th colspan="7" class="py-2 px-4 border-b border-gray-200" style="text-align: left;">{{ $fichaDiaria->descripcion }}</th>
                             </tr>            
                         </tfoot>
                         

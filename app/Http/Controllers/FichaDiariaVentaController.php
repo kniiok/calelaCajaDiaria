@@ -135,7 +135,7 @@ public function create()
         $audit = new AuditController();
         $tipoProducto = TipoProducto::find($request->idTipoProducto);
         $total = $request->montoTransferencia + $request->montoTarjeta + $request->montoEfectivo;
-        $operacion = 'Registro de venta N° ' . $venta->id . '; Detalle: ' . $venta->detalle . ' - Por producto tipo: ' . $tipoProducto->tipo . '; por un valor total: ' . number_format($total, 0, ',', '.') . ';  - ' . Carbon::now()->format('H:i');
+        $operacion = 'Registro de venta N° ' . $venta->id . '; Detalle: ' . $venta->detalle . ' - Por producto tipo: ' . $tipoProducto->tipo . '; por un valor total: $' . number_format($total, 0, ',', '.') . ';  - ' . Carbon::now()->format('H:i');
         $audit->create($operacion);
 
         // Redireccionar a la vista fichaDiaria.index
@@ -143,20 +143,24 @@ public function create()
     }
 
     public function finalizar()
-    {
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
+{
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-        // Obtener la ficha diaria actual
-        $fichaDiaria = FichaDiaria::whereDate('created_at', Carbon::today())->first();
+    // Obtener la ficha diaria actual
+    $fichaDiaria = FichaDiaria::whereDate('created_at', Carbon::today())->first();
 
-        // Verificar si se encontró la ficha diaria para la fecha actual
-        if (!$fichaDiaria) {
-            return redirect()->route('fichadiaria.hoy')->with('error', 'No se encontró la ficha diaria para la fecha actual.');
-        }
-
-        // Pasar la ficha diaria a la vista del formulario de finalización del día
-        return view('ventas.finalizar', compact('fichaDiaria'))->with('idActual', $fichaDiaria->id)->with('totalCaja', $fichaDiaria->totalCaja);
+    // Verificar si se encontró la ficha diaria para la fecha actual
+    if (!$fichaDiaria) {
+        return redirect()->route('fichadiaria.hoy')->with('error', 'No se encontró la ficha diaria para la fecha actual.');
     }
+
+    // Obtener las ventas asociadas a la ficha diaria
+    $ventas = $fichaDiaria->ventas;
+
+    // Pasar la ficha diaria y las ventas a la vista del formulario de finalización del día
+    return view('ventas.finalizar', compact('fichaDiaria', 'ventas'))->with('idActual', $fichaDiaria->id)->with('totalCaja', $fichaDiaria->totalCaja);
+}
+
 
     public function finalizarDia(Request $request)
 {
@@ -179,7 +183,7 @@ public function create()
 
     //carga una actividad realizada por el usuario
     $audit = new AuditController();
-    $operacion = 'Finalizo dia el Usuario '.auth()->user()->nombre.'; Descripción: '.$fichaDiaria->descripcion.';  - '. Carbon::now()->format('H:i');
+    $operacion = 'Finalizo dia el Usuario '.auth()->user()->name.'; Valor a pozo: $'.$fichaDiaria->aPozo.'; Caja chica: $'.$fichaDiaria->cajaChica.'; Descripción: '.$fichaDiaria->descripcion.';  - '. Carbon::now()->format('H:i');
     $audit->create($operacion);
 
     // Redireccionar a la vista fichaDiaria.index
