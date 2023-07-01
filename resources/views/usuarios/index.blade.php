@@ -17,23 +17,23 @@
             <table class="w-full border-solid border bg-white animate__animated animate__fadeIn">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="py-2 px-4 border-b border-gray-200">ID</th>
-                        <th class="py-2 px-4 border-b border-gray-200">Nombre</th>
-                        <th class="py-2 px-4 border-b border-gray-200"></th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">ID</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-right">Nombre</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-right">Eliminar</th>
                         <!-- Otros campos de usuario que deseas mostrar -->
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $user->id }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">{{ $user->name }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">
+                            <td class="py-2 px-4 border-b border-gray-200 text-center">{{ $user->id }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-right">{{ $user->name }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-right">
                                 @if ($user->id !== auth()->user()->id)
                                     <form action="{{ route('usuarios.eliminar', $user->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar al usuario {{$user->id}}: {{$user->name}}?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded animate__animated animate__fadeIn">Eliminar usuario</button>
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">X</button>
                                     </form>
                                 @endif
                             </td>

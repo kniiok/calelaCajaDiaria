@@ -174,10 +174,14 @@
 <div class="flex items-center justify-end">
     @if (Auth::check())
     @php
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $hour = date('H');
+        $dayOfWeek = date('N');
         $greeting = '';
 
-        if ($hour >= 0 && $hour < 12) {
+        if ($dayOfWeek == 6 && $hour >= 18 && $hour <= 23) {
+            $greeting = '¡Hasta el Lunes';
+        } elseif ($hour >= 0 && $hour < 12) {
             $greeting = '¡Buen día';
         } elseif ($hour >= 12 && $hour < 18) {
             $greeting = '¡Buenas tardes';
@@ -193,6 +197,7 @@
         exit;
     @endphp
 @endif
+
 
 
     <form method="POST" action="{{ route('logout') }}" x-data>

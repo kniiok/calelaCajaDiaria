@@ -31,23 +31,23 @@
             <table class="w-full border-solid border bg-white animate__animated animate__fadeIn">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="py-2 px-4 border-b border-gray-200 text-center">Idea</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-center">Fecha</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-center"></th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-left">Idea</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-right">Fecha</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-right">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(!$ideas->isEmpty())
                     @foreach ($ideas as $idea)
         <tr>
-            <td class="py-2 px-4 border-b border-gray-200">{{ $idea->descripcion }}</td>
-            <td class="py-2 px-4 border-b border-gray-200">{{ date('d/m/Y', strtotime($idea->fecha)) }}</td>
-            <td class="py-2 px-4 border-b border-gray-200">
+            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $idea->descripcion }}</td>
+            <td class="py-2 px-4 border-b border-gray-200 text-right">{{ date('d/m/Y', strtotime($idea->fecha)) }}</td>
+            <td class="py-2 px-4 border-b border-gray-200 text-right">
                 <form action="{{ route('ideas.destroy', $idea->id) }}" method="post" onsubmit="return confirm('¿Realmente deseas eliminar esta idea?');">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                        Eliminar
+                        X
                     </button>
                 </form>
             </td>
@@ -55,7 +55,7 @@
         @endforeach
                     @else
                     <tr>
-                        <td colspan="2" class="py-2 px-4 border-b border-gray-200 text-center" style="text-align:left;">No hay ideas</td>
+                        <td colspan="2" class="py-2 px-4 border-b border-gray-200 text-left">No hay ideas</td>
                     </tr>
                     @endif
                 </tbody>
