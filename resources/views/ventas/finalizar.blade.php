@@ -4,6 +4,8 @@
 
 <head>
   <link href="css/animate.min.css" rel="stylesheet">
+  <link href='css/sweetalert2.all.min.css' rel="stylesheet">
+
 </head>
 <div hidden>
 {{$montoEfectivo=0}} 
@@ -17,7 +19,7 @@
     <?php $totalCaja = $fichaDiaria->inicioCaja + $montoEfectivo?>
     <h2 class="mt-10 text-center text-2xl leading-9 tracking-tight text-gray-900 animate__animated animate__fadeIn">El total de la caja actual es de: $ {{$totalCaja}}</h2>
   </div>
-  <form action="{{ route('ventas.finalizarDia') }}" method="POST" class="animate__animated animate__fadeIn">
+  <form action="{{ route('ventas.finalizarDia') }}" method="POST" class="animate__animated animate__fadeIn" id="fin-form">
     @csrf
     <input type="hidden" name="id" value="{{ $idActual }}">
     <div>
@@ -58,5 +60,25 @@
       aPozoInput.setCustomValidity('');
     }
   });
+</script>
+<script src='js/sweetalert2.all.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const finForm = document.getElementById('fin-form');
+
+        finForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Mostrar el mensaje de confirmación
+            Swal.fire({
+                title: 'Finalizó el día correctamente',
+                text: 'Se redirigirá a la Ficha Diaria.',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then((result) => {
+                finForm.submit();
+            });
+        });
+    });
 </script>
 @endsection

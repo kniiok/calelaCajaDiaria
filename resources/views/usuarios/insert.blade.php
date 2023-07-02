@@ -4,13 +4,14 @@
 
 <head>
     <link href="css/animate.min.css" rel="stylesheet">
+    <link href='css/sweetalert2.all.min.css' rel="stylesheet">
 </head>
 
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm animate__animated animate__fadeIn">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 animate__animated animate__fadeIn">Nuevo Usuario</h2>
     </div>
-    <form action="{{ route('usuarios.store') }}" method="get" class="animate__animated animate__fadeIn">
+    <form action="{{ route('usuarios.store') }}" method="get" class="animate__animated animate__fadeIn" id="user-form">
         @csrf
         <div>
             <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Nombre:</label>
@@ -46,19 +47,6 @@
                 <label for="vendedor" class="m-auto p-2  text-sm font-medium leading-6 text-gray-900 animate__animated animate__fadeIn">Vendedor</label>
             </div>
         </div>
-
-        {{--<div>
-            <label for="rolUsuario" class="block text-sm font-medium leading-6 text-gray-900">Estado del
-                usuario:</label>
-             <div class="m-auto inline-flex">
-                <input type="radio" id="estadoUsuario" name="estadoUsuario" value="1"
-                    class="form-radio h-4 w-4 text-indigo-600 m-auto p-2 animate__animated animate__fadeIn">
-                <label for="activo" class="m-auto p-2  text-sm font-medium leading-6 text-gray-900 animate__animated animate__fadeIn">Activo</label>
-                <input type="radio" id="estadoUsuario" name="estadoUsuario" value="2"
-                    class="form-radio h-4 w-4 text-indigo-600  m-auto p-2 animate__animated animate__fadeIn">
-                <label for="inactivo" class="m-auto p-2  text-sm font-medium leading-6 text-gray-900 animate__animated animate__fadeIn">Inactivo</label>
-            </div> 
-        </div> --}}
         <br>
         <div>
             <button type="submit"
@@ -67,4 +55,24 @@
         </div>
     </form>
 </div>
+<script src='js/sweetalert2.all.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const userForm = document.getElementById('user-form');
+
+        userForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Mostrar el mensaje de confirmación
+            Swal.fire({
+                title: 'Usuario agregado correctamente',
+                text: 'Se redirigirá a Usuarios.',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then((result) => {
+                userForm.submit();
+            });
+        });
+    });
+</script>
 @endsection

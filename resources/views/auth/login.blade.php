@@ -1,3 +1,7 @@
+<head>
+    <link href="css/animate.min.css" rel="stylesheet">
+  </head>
+  <div class="animate__animated animate__fadeIn">
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -24,12 +28,13 @@
                 <x-label for="password" value="{{ __('Contraseña') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             </div>
-                <div align="center" class="block mt-4">
+
+            <div align="center" class="block mt-4">
                 <x-button class="ml-4">
                     {{ __('Iniciar sesión') }}
                 </x-button>
-                </div>
             </div>
         </form>
     </x-authentication-card>
 </x-guest-layout>
+</div>

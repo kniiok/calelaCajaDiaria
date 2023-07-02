@@ -18,18 +18,20 @@
             <table class="w-full border-solid border bg-white animate__animated animate__fadeIn">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="py-2 px-4 border-b border-gray-200 text-center">ID</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-right">Nombre</th>
-                        <th class="py-2 px-4 border-b border-gray-200 text-right">Eliminar</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-left">Nombre</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-left">E-mail</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-left">Rol</th>
+                        <th class="py-2 px-4 border-b border-gray-200 text-center">Eliminar</th>
                         <!-- Otros campos de usuario que deseas mostrar -->
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td class="py-2 px-4 border-b border-gray-200 text-center">{{ $user->id }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-right">{{ $user->name }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-right">
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $user->name }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $user->email }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $user->rol->tipoRol }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-center">
                                 @if ($user->id !== auth()->user()->id)
                                     <form action="{{ route('usuarios.eliminar', $user->id) }}" method="POST" id="eliminarForm{{ $user->id }}">
                                         @csrf
@@ -43,7 +45,7 @@
                         </tr>
                     @endforeach
                     <tr class="bg-gray-200">
-                        <td colspan="3" class="py-2 px-4 border-b border-gray-200">
+                        <td colspan="4" class="py-2 px-4 border-b border-gray-200">
                             <div align="center">
                                 <a href="/agregar" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded animate__animated animate__fadeIn">Agregar usuario</a>
                             </div>

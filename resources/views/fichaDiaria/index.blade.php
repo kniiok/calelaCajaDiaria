@@ -46,7 +46,7 @@
                                 <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Tela</th>
                                 <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Arreglo</th>
                                 <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Total final</th>
-                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Eliminar</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +94,7 @@
                                             @endif
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200"></td>
-                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
+                                        <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">
                                             <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
@@ -173,7 +173,11 @@
                         event.preventDefault();
         
                         Swal.fire({
-                            title: '¿Realmente deseas eliminar la venta "{{ $venta->detalle }}" de valor ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}?',
+                            <?php if($ventas==[] || $ventas->isEmpty()){
+
+                            }
+                            ?>
+                            title: '¿Realmente deseas eliminar esta venta?',
                             text: 'Esta acción es irreversible.',
                             icon: 'warning',
                             showCancelButton: true,
