@@ -4,13 +4,14 @@
 
 <head>
     <link href="css/animate.min.css" rel="stylesheet">
+    <link href='css/sweetalert2.all.min.css' rel="stylesheet">
 </head>
 
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm animate__animated animate__fadeIn">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 animate__animated animate__fadeIn">Registrar Venta</h2>
     </div>
-    <form action="{{ route('ventas.store') }}" method="post" class="animate__animated animate__fadeIn">
+    <form action="{{ route('ventas.store') }}" method="post" class="animate__animated animate__fadeIn" id="venta-form">
         @csrf
         <div>
             <label for="idTipoProducto" class="block text-sm font-medium leading-6 text-gray-900">Tipo de
@@ -62,4 +63,25 @@
         </div>
     </form>
 </div>
+<script src='js/sweetalert2.all.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ventaForm = document.getElementById('venta-form');
+
+        ventaForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Mostrar el mensaje de confirmación
+            Swal.fire({
+                title: 'Venta agregada correctamente',
+                text: 'Se redirigirá a la Ficha Diaria.',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then((result) => {
+                ventaForm.submit();
+            });
+        });
+    });
+</script>
+
 @endsection

@@ -54,7 +54,12 @@ public function store(Request $request)
         // Eliminar el usuario
         $usuario->delete();
 
+        //Dormir
+        usleep(1200000);
+
         // Redireccionar a la vista de usuarios con un mensaje de éxito
-        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente');
+        return redirect()->route('usuarios.index');
+
+        //return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente');
     }
 }

@@ -37,7 +37,7 @@ public function destroy($id)
 
         // Eliminar la idea
         $idea->delete();
-
+        usleep(1200000);
         return redirect('/ideas')->with('success', 'La idea ha sido eliminada correctamente.');
     }
 }

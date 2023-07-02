@@ -137,7 +137,7 @@ public function create()
         $total = $request->montoTransferencia + $request->montoTarjeta + $request->montoEfectivo;
         $operacion = 'Registro de venta N° ' . $venta->id . '; Detalle: ' . $venta->detalle . ' - Producto: ' . $tipoProducto->tipo . '; Valor total: $' . number_format($total, 0, ',', '.') . ';  - ' . Carbon::now()->format('H:i');
         $audit->create($operacion);
-
+        usleep(1200000);
         // Redireccionar a la vista fichaDiaria.index
         return redirect()->route('fichadiaria.hoy');
     }
@@ -185,7 +185,7 @@ public function create()
     $audit = new AuditController();
     $operacion = 'Finalizo dia el Usuario '.auth()->user()->name.'; Valor a pozo: $'.$fichaDiaria->aPozo.'; Caja chica: $'.$fichaDiaria->cajaChica.'; Descripción: '.$fichaDiaria->descripcion.';  - '. Carbon::now()->format('H:i');
     $audit->create($operacion);
-
+    usleep(1200000);
     // Redireccionar a la vista fichaDiaria.index
     return redirect('/realizar-respaldo')->with('success', 'Día finalizado exitosamente');
 }
@@ -202,7 +202,9 @@ public function create()
             . ';  - ' . Carbon::now()->format('H:i');
         $audit->create($operacion);
         $venta->delete();
-        return redirect()->route('fichadiaria.hoy');
+        //Dormir
+        usleep(1200000);
         // Redireccionar o realizar otras acciones necesarias
+        return redirect()->route('fichadiaria.hoy')->with('ventaEliminadaId', $venta->id);
     }
 }

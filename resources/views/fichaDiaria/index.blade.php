@@ -8,8 +8,10 @@
     </x-slot>
     <head>
         <link href="css/animate.min.css" rel="stylesheet">
-    </head>
+        <link href='css/sweetalert2.all.min.css' rel="stylesheet">
 
+    </head>
+@php $ventaEliminadaId = 0; @endphp
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg animate__animated animate__fadeIn">
@@ -93,15 +95,21 @@
                                         </td>
                                         <td class="py-2 px-4 border-b border-gray-200"></td>
                                         <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
-                                            <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" onsubmit="return confirm('¿Realmente deseas eliminar la venta {{$venta->detalle}} de valor {{$venta->montoEfectivo+$venta->MontoTarjeta+$venta->MontoTransferencia}}?');">
+                                            <form action="{{ route('ventas.destroy', $venta->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                <button type="submit" id="eliminar" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-btn">
                                                     X
                                                 </button>
                                             </form>
                                         </td>
                                     </tr>
+                                    @php
+                                        // Verificar si la venta actual es la que se está eliminando
+                                        if ($venta->id == $ventaEliminadaId) {
+                                            $aPozo = 0;
+                                        }
+                                    @endphp
                                 @endforeach
                                 @php
                                     $totalFinal = $totalEfectivo + $totalTarjeta + $totalTransferencia;
@@ -141,7 +149,6 @@
                         </tfoot>
                         
                     </table>
-       
                 @php
                     $fichaDiaria->totalVentas = $totalFinal;
                     $fichaDiaria->totalTela = $totalTela;
@@ -154,6 +161,46 @@
                 </div>
             </div>
         </div>
+        <script>
+            // Agregar el siguiente código en la sección <script> de tu archivo blade
+        
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteForms = document.querySelectorAll('.delete-form');
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+        
+                deleteForms.forEach((form, index) => {
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault();
+        
+                        Swal.fire({
+                            title: '¿Realmente deseas eliminar la venta "{{ $venta->detalle }}" de valor ${{ $venta->montoEfectivo + $venta->montoTarjeta + $venta->montoTransferencia }}?',
+                            text: 'Esta acción es irreversible.',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, eliminar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Si se confirma la eliminación, enviar el formulario
+                                this.submit();
+                                // Mostrar confirmación de eliminación
+                                Swal.fire({
+                                    title: 'Venta eliminada',
+                                    text: 'La venta ha sido eliminado exitosamente.',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+                <script src='js/sweetalert2.all.min.js'></script>
+
     </div>
 
 @endsection

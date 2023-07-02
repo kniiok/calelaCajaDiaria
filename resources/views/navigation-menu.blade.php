@@ -179,7 +179,7 @@
         $dayOfWeek = date('N');
         $greeting = '';
 
-        if ($dayOfWeek == 6 && $hour >= 18 && $hour <= 23) {
+        if ($dayOfWeek == 6 && $hour >= 13 && $hour <= 23) {
             $greeting = '¡Hasta el Lunes';
         } elseif ($hour >= 0 && $hour < 12) {
             $greeting = '¡Buen día';

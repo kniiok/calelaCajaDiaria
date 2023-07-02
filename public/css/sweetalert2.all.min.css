@@ -1,0 +1,321 @@
+.swal2-popup.swal2-toast {
+    box-sizing: border-box;
+    grid-column: 1/4 !important;
+    grid-row: 1/4 !important;
+    grid-template-columns: 1fr 99fr 1fr;
+    padding: 1em;
+    overflow-y: hidden;
+    background: #fff;
+    box-shadow: 0 0 0.625em #d9d9d9;
+    pointer-events: all;
+}
+
+.swal2-popup.swal2-toast > * {
+    grid-column: 2;
+}
+
+.swal2-popup.swal2-toast .swal2-title {
+    margin: 1em;
+    padding: 0;
+    font-size: 1em;
+    text-align: initial;
+}
+
+.swal2-popup.swal2-toast .swal2-loading {
+    justify-content: center;
+}
+
+.swal2-popup.swal2-toast .swal2-input {
+    height: 2em;
+    margin: 0.5em;
+    font-size: 1em;
+}
+
+.swal2-popup.swal2-toast .swal2-validation-message {
+    font-size: 1em;
+}
+
+.swal2-popup.swal2-toast .swal2-footer {
+    margin: 0.5em 0 0;
+    padding: 0.5em 0 0;
+    font-size: 0.8em;
+}
+
+.swal2-popup.swal2-toast .swal2-close {
+    grid-column: 3/3;
+    grid-row: 1/99;
+    align-self: center;
+    width: 0.8em;
+    height: 0.8em;
+    margin: 0;
+    font-size: 2em;
+}
+
+.swal2-popup.swal2-toast .swal2-html-container {
+    margin: 1em;
+    padding: 0;
+    font-size: 1em;
+    text-align: initial;
+}
+
+.swal2-popup.swal2-toast .swal2-html-container:empty {
+    padding: 0;
+}
+
+.swal2-popup.swal2-toast .swal2-loader {
+    grid-column: 1;
+    grid-row: 1/99;
+    align-self: center;
+    width: 2em;
+    height: 2em;
+    margin: 0.25em;
+}
+
+.swal2-popup.swal2-toast .swal2-icon {
+    grid-column: 1;
+    grid-row: 1/99;
+    align-self: center;
+    width: 2em;
+    min-width: 2em;
+    height: 2em;
+    margin: 0 0.5em 0 0;
+}
+
+.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content {
+    display: flex;
+    align-items: center;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring {
+    width: 2em;
+    height: 2em;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
+    top: 0.875em;
+    width: 1.375em;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-icon.swal2-error
+    [class^="swal2-x-mark-line"][class$="left"] {
+    left: 0.3125em;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-icon.swal2-error
+    [class^="swal2-x-mark-line"][class$="right"] {
+    right: 0.3125em;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-icon.swal2-warning
+    [class^="swal2-x-mark-line"] {
+    top: 0.875em;
+    width: 1.375em;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-icon.swal2-warning
+    [class^="swal2-x-mark-line"][class$="left"] {
+    left: 0.3125em;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-icon.swal2-warning
+    [class^="swal2-x-mark-line"][class$="right"] {
+    right: 0.3125em;
+}
+
+.swal2-popup.swal2-toast .swal2-progress-steps .swal2-progress-step {
+    position: absolute;
+    top: 0.625em;
+    width: 1.0625em;
+    height: 1.0625em;
+    border: 0.125em solid #808080;
+    border-radius: 50%;
+    background: 0 0;
+    opacity: 0.4;
+    transition: border-color 0.5s, opacity 0.5s;
+    box-sizing: content-box;
+}
+
+.swal2-popup.swal2-toast .swal2-progress-steps .swal2-progress-step-line {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    width: 100%;
+    height: 0.125em;
+    background-color: #808080;
+    opacity: 0.4;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step-line:nth-child(1) {
+    right: 50%;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step-line:nth-child(3) {
+    left: 50%;
+}
+
+.swal2-popup.swal2-toast .swal2-progress-steps .swal2-progress-step-line-tip {
+    position: absolute;
+    top: 0.625em;
+    width: 1.0625em;
+    height: 1.0625em;
+    transform: rotate(45deg);
+    border: 0.125em solid #808080;
+    border-radius: 50%;
+    background: #808080;
+    opacity: 0.4;
+    box-sizing: content-box;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step:nth-child(1) {
+    left: 0;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step:nth-child(2) {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step:nth-child(3) {
+    right: 0;
+}
+
+.swal2-popup.swal2-toast .swal2-progress-steps.swal2-progress-full {
+    transition: none;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps.swal2-progress-full
+    .swal2-progress-step-line {
+    background-color: #008000;
+    opacity: 1;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps.swal2-progress-full
+    .swal2-progress-step-line-tip {
+    background: #008000;
+    opacity: 1;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-animation-success
+    .swal2-success-circular-line-left,
+.swal2-popup.swal2-toast
+    .swal2-animation-success
+    .swal2-success-circular-line-right {
+    position: absolute;
+    width: 0.3125em;
+    height: 2.1875em;
+    transform: rotate(45deg);
+    border-radius: 2em;
+    transition-duration: 0.75s;
+    transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.swal2-popup.swal2-toast
+    .swal2-animation-success
+    .swal2-success-circular-line-left {
+    top: 0.875em;
+    left: 0.4375em;
+    transform-origin: 0 0;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-animation-success
+    .swal2-success-circular-line-right {
+    top: 0.875em;
+    right: 0.4375em;
+    transform-origin: 100% 0;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-animation-success
+    .swal2-success-circular-line-left-animate {
+    transform: rotate(180deg);
+    transition-delay: 0.35s;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-animation-success
+    .swal2-success-circular-line-right-animate {
+    transform: rotate(180deg);
+    transition-delay: 0.35s;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step.swal2-progress-step-line-tip-animate {
+    transition-delay: 0.5s;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step.swal2-progress-step-line-animate {
+    transition-delay: 0.5s;
+}
+
+.swal2-popup.swal2-toast
+    .swal2-progress-steps
+    .swal2-progress-step-line.swal2-progress-step-line-tip-animate {
+    transition-delay: 0.5s;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-question {
+    border-color: #9e9e9e;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-warning {
+    border-color: #ffc107;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-success {
+    border-color: #4caf50;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-info {
+    border-color: #2196f3;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-error {
+    border-color: #f44336;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-question .swal2-icon-content {
+    border-color: #9e9e9e;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-warning .swal2-icon-content {
+    border-color: #ffc107;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-icon-content {
+    border-color: #4caf50;
+    color: #4caf50;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-info .swal2-icon-content {
+    border-color: #2196f3;
+    color: #2196f3;
+}
+
+.swal2-popup.swal2-toast .swal2-icon.swal2-error .swal2-icon-content {
+    border-color: #f44336;
+    color: #f44336;
+}

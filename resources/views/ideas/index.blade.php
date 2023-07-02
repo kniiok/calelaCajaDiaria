@@ -2,6 +2,7 @@
 @section('content')
 <head>
     <link href="css/animate.min.css" rel="stylesheet">
+    <link href='css/sweetalert2.all.min.css' rel="stylesheet">
 </head>
 <div class="mt-10 sm:mx-auto sm:w-1/2 sm:max-w-md animate__animated animate__fadeIn">
     <form action="{{ route('ideas.store') }}" method="POST">
@@ -43,13 +44,13 @@
             <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $idea->descripcion }}</td>
             <td class="py-2 px-4 border-b border-gray-200 text-right">{{ date('d/m/Y', strtotime($idea->fecha)) }}</td>
             <td class="py-2 px-4 border-b border-gray-200 text-right">
-                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post" onsubmit="return confirm('¿Realmente deseas eliminar esta idea?');">
+                <form action="{{ route('ideas.destroy', $idea->id) }}" method="post" class="delete-idea-form">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-idea-btn">
                         X
                     </button>
-                </form>
+                </form>                
             </td>
         </tr>
         @endforeach
@@ -66,5 +67,39 @@
 
 {{ $ideas->links() }}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteForms = document.querySelectorAll('.delete-idea-form');
 
+        deleteForms.forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: '¿Realmente deseas eliminar esta idea?',
+                    text: 'Esta acción es irreversible.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                        // Mostrar confirmación de eliminación
+                Swal.fire({
+                    title: 'Idea eliminada',
+                    text: 'La idea ha sido eliminada exitosamente.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                    }
+                });
+            });
+        });
+    });
+</script>
+<script src='js/sweetalert2.all.min.js'></script>
 @endsection
