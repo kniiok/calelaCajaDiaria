@@ -117,7 +117,7 @@
                             @endif
                         </tbody>
                         <tfoot>
-                            <tr class="bg-gray-200">
+                            <tr class="bg-gray-200 totales-row">
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Total ventas:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalEfectivo, 2, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalTarjeta, 2, ',', '.') }}</td>
@@ -127,24 +127,43 @@
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalFinal, 2, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
-                            <tr class="bg-gray-200">
+                            <tr class="bg-gray-200 totales-row">
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Total caja:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($totalCaja = $totalEfectivo + $fichaDiaria->inicioCaja, 2, ',', '.') }}</td>
-                                <td></td><td></td><td></td><td></td><td></td><td></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
-                            <tr class="bg-gray-200">
+                            <tr class="bg-gray-200 totales-row">
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">A pozo:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($aPozo = $fichaDiaria->aPozo, 2, ',', '.') }}</td>
-                                <td></td><td></td><td></td><td></td><td></td><td></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
-                            <tr class="bg-gray-200">
+                            <tr class="bg-gray-200 totales-row">
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Caja chica:</td>
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ number_format($cajaChica = $totalCaja - $aPozo, 2, ',', '.') }}</td>
-                                <td></td><td></td><td></td><td></td><td></td><td></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
                             </tr>
+                            
                             <tr class="bg-gray-200">
                                 <td class="py-2 px-4 border-b border-gray-200" style="text-align: left;">Descripción:</td>
-                                <th colspan="7" class="py-2 px-4 border-b border-gray-200" style="text-align: left;">{{ $fichaDiaria->descripcion }}</th>
+                                <th colspan="6" class="py-2 px-4 border-b border-gray-200" style="text-align: left;">{{ $fichaDiaria->descripcion }}</th>
+                                <th class="py-2 px-4 border-b border-gray-200" style="text-align: center;">
+                                    <button id="toggleTotales" class="text-indigo-600" onclick="toggleTotals()">Ocultar Totales</button>
+                                </th>  
                             </tr>            
                         </tfoot>
                         
@@ -203,7 +222,43 @@
                 });
             });
         </script>
+        <script>
+            window.onload = function () {
+    var toggleButton = document.getElementById('toggleTotales');
+    var totalesRows = document.getElementsByClassName('totales-row'); // Obtener todas las filas de totales
+    var isTotalesHidden = false; // Bandera para rastrear el estado actual de los totales
+
+    toggleButton.addEventListener('click', function () {
+        isTotalesHidden = !isTotalesHidden; // Alternar el estado de ocultar/mostrar
+
+        for (var i = 0; i < totalesRows.length; i++) {
+            totalesRows[i].style.display = isTotalesHidden ? 'none' : 'table-row'; // Aplicar el estilo de ocultar/mostrar a cada fila de totales
+        }
+    });
+};
+        </script>
+        <script>
+            function toggleTotals() {
+    var toggleButton = document.getElementById('toggleTotales');
+    var totalesRows = document.getElementsByClassName('totales-row');
+    var isTotalesHidden = false;
+
+    if (toggleButton.textContent === 'Ocultar Totales') {
+        toggleButton.textContent = 'Mostrar Totales';
+        isTotalesHidden = true;
+    } else {
+        toggleButton.textContent = 'Ocultar Totales';
+        isTotalesHidden = false;
+    }
+
+    for (var i = 0; i < totalesRows.length; i++) {
+        totalesRows[i].style.display = isTotalesHidden ? 'none' : 'table-row';
+    }
+}
+
+          </script>
                 <script src='js/sweetalert2.all.min.js'></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </div>
 

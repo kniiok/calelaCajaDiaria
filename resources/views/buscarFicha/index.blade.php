@@ -37,13 +37,16 @@
                             <td colspan="4" class="py-2 px-4 border-b border-gray-200">
                                 Fecha: {{ $fecha->format('d/m/Y') }}
                             </td>
-                            <td colspan="3" class="py-2 px-4 border-b border-gray-200">
+                            <td colspan="2" class="py-2 px-4 border-b border-gray-200">
                                 @if (isset($fichaDiaria))
                                     Inicio de caja: ${{ $fichaDiaria->inicioCaja }}
                                 @else
                                     No hay ficha para el día:  {{ $fecha->format('d/m/Y') }}
                                 @endif
                             </td>
+                                <td colspan="7" class="py-2 px-4 border-b border-gray-200">
+                                    <button id="toggleTotales" class="text-indigo-600">Ocultar Totales</button>
+                                </td>                            
                         </tr>
                         <tr class="bg-gray-100">
                             <td class="py-2 px-4 border-b border-gray-200" style="text-align: center;">Detalle</td>
@@ -102,20 +105,64 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr class="bg-gray-200">
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">Totales</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalEfectivo }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTarjeta }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTransferencia }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalTela }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">${{ $totalArreglo }}</td>
-                                <td class="py-2 px-4 border-b border-gray-200" style="text-align: right;">
+                            <tr class="bg-gray-200 totales-row">
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;">Totales</td>
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;">${{ $totalEfectivo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;">${{ $totalTarjeta }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;">${{ $totalTransferencia }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;">${{ $totalTela }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;">${{ $totalArreglo }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 totales-cell" style="text-align: right;" data-original-value="${{ $totalEfectivo + $totalTarjeta + $totalTransferencia }}">
                                     ${{ $totalEfectivo + $totalTarjeta + $totalTransferencia }}</td>
                             </tr>
+                            
                         @endif
                     </table>
                 @endif
             </div>
         </div>
     </div>
+    <script>
+        window.onload = function () {
+            var toggleButton = document.getElementById('toggleTotales');
+            var totalesRows = document.getElementsByClassName('totales-row');
+            var originalValues = []; // Almacenar los valores originales de las celdas de totales
+            var isTotalesHidden = false; // Bandera para rastrear el estado actual de los totales
+    
+            // Guardar los valores originales en un arreglo
+            for (var i = 0; i < totalesRows.length; i++) {
+                var row = totalesRows[i];
+                var totalesCells = row.getElementsByClassName('totales-cell');
+                var rowValues = [];
+    
+                for (var j = 0; j < totalesCells.length; j++) {
+                    var cell = totalesCells[j];
+                    rowValues.push(cell.innerText); // Guardar el valor original
+                }
+    
+                originalValues.push(rowValues);
+            }
+    
+            toggleButton.addEventListener('click', function () {
+                isTotalesHidden = !isTotalesHidden; // Alternar el estado de ocultar/mostrar
+    
+                for (var i = 0; i < totalesRows.length; i++) {
+                    var row = totalesRows[i];
+                    var totalesCells = row.getElementsByClassName('totales-cell');
+    
+                    for (var j = 0; j < totalesCells.length; j++) {
+                        var cell = totalesCells[j];
+    
+                        if (isTotalesHidden) {
+                            cell.innerText = '';
+                        } else {
+                            cell.innerText = originalValues[i][j]; // Restaurar el valor original
+                        }
+                    }
+                }
+    
+                toggleButton.innerText = isTotalesHidden ? 'Mostrar Totales' : 'Ocultar Totales';
+            });
+        };
+    </script>    
 @endsection
