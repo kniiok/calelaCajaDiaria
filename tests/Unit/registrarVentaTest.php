@@ -22,8 +22,8 @@ class registrarVentaTest extends TestCase
         $response->assertRedirect('/fichadiaria');
         $this->assertDatabaseHas('ventas', [
             'idTipoProducto' => 1,
-            'idFichaDiaria' => '2',
-            'fecha' => '2023-06-26',
+            'idFichaDiaria' => 2,
+            'fecha' => '2023-07-04',
             'detalle' => 'Detalle de prueba',
             'montoEfectivo' => 100,
             'montoTarjeta' => 0,

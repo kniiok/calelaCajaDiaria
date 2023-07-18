@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('fichadiarias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUsuario');
             $table->float('inicioCaja', 10, 2);
             $table->float('totalVentas', 10, 2);
             $table->float('totalTela', 10, 2)->default(0);
@@ -22,9 +21,6 @@ return new class extends Migration
             $table->float('cajaChica', 10, 2);
             $table->text('descripcion');
             $table->timestamps();
-
-            $table->foreign('idUsuario')->references('id')->on('users');
-
         });
     }
 

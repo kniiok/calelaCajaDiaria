@@ -52,7 +52,6 @@ class FichaDiariaVentaController extends Controller
     } else {
         // Si no se encontró la ficha diaria, crear una nueva
         $fichaDiaria = FichaDiaria::create([
-            'idUsuario' => auth()->user()->id,
             'inicioCaja' => $inicioCaja,
             'totalVentas' => 0,
             'aPozo' => 0,
