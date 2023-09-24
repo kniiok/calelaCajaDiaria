@@ -6,6 +6,8 @@ use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FichaDiariaVentaController;
 use App\Http\Controllers\IdeasController;
+use App\Http\Controllers\StatsController;
+
 
 
 Route::redirect('/', '/fichadiaria');
@@ -46,7 +48,8 @@ Route::post('/listo', [FichaDiariaVentaController::class, 'finalizarDia'])->name
 Route::delete('/ventas/{venta}', [FichaDiariaVentaController::class, 'destroy'])->name('ventas.destroy');
 Route::get(('/buscar'), function (){
     return view('buscarFicha.index');})->name('fichas.buscar');
-Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');
+    Route::get('/stats', [StatsController::class, 'showStats'])->name('stats');
+    Route::get('/buscada', [FichaDiariaVentaController::class, 'buscar'])->name('fichas.buscada');
 Route::get('/ideas', [IdeasController::class, 'show'])->name('ideas.index');
 Route::post('/ideas/store', [IdeasController::class, 'store'])->name('ideas.store');
 Route::delete('/ideas/{id}', [IdeasController::class, 'destroy'])->name('ideas.destroy');

@@ -55,6 +55,12 @@
                     <x-nav-link href="{{ route('ideas.index') }}" :active="request()->routeIs('ideas')">
                         {{ __('Ideas') }}
                     </x-nav-link>
+
+                    @if(auth()->check() && auth()->user()->rol_id === 1)
+                    <x-nav-link href="{{route('stats', auth()->user())}}" :active="request()->routeIs('stats')">
+                        {{ __('Estadísticas') }}
+                    </x-nav-link>
+                    @endif
                     
                 </div>
             </div>
