@@ -22,91 +22,134 @@
                             <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->anio }}</td>
                             <td class="py-2 px-4 border-b border-gray-200 text-left">{{ strftime('%B', mktime(0, 0, 0, $stat->mes, 10)) }}</td>
                             <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->tipo_producto }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->ventas_efectivo }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->ventas_tarjeta }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->ventas_transferencia }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->total_ventas }}</td>
-                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ $stat->cantidad_ventas }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">${{ number_format($stat->ventas_efectivo, 2, ',', '.') }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">${{ number_format($stat->ventas_tarjeta, 2, ',', '.') }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">${{ number_format($stat->ventas_transferencia, 2, ',', '.') }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">${{ number_format($stat->total_ventas, 2, ',', '.') }}</td>
+                            <td class="py-2 px-4 border-b border-gray-200 text-left">{{ number_format($stat->cantidad_ventas, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             <div>
-                <canvas id="monthlySalesChart" width="400" height="200"></canvas>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                var ctx = document.getElementById('monthlySalesChart').getContext('2d');
-                var labels = @json($monthlySales->pluck('month'));
-                var data = @json($monthlySales->pluck('total_sales'));
-                var dataArreglos = @json($arregloSales);
-                var dataTelas = @json($telaSales);
-                var dataMerceria = @json($merceriaSales);
-                var chart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Ventas por Mes',
-                            data: data,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            x: [{
-                                type: 'time',
-                                time: {
-                                    unit: 'month',
-                                    displayFormats: {
-                                        month: 'MMM YYYY'
+                <canvas id="monthlySalesChart" width="200" height="50"></canvas>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    var ctx = document.getElementById('monthlySalesChart').getContext('2d');
+                    var labels = @json($monthlySales->pluck('month'));
+                    var data = @json($monthlySales->pluck('total_sales'));
+                    var dataArreglos = @json($arregloSales);
+                    var dataTelas = @json($telaSales);
+                    var dataMerceria = @json($merceriaSales);
+            
+                    var chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Ventas por Mes',
+                                data: data,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 2
+                            },
+                            {
+                                label: 'Ventas de Arreglos por Mes',
+                                data: dataArreglos.map(entry => entry.total_sales),
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 2,
+                                hidden: true
+                            },
+                            {
+                                label: 'Ventas de Telas por Mes',
+                                data: dataTelas.map(entry => entry.total_sales),
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 2,
+                                hidden: true
+                            },
+                            {
+                                label: 'Ventas de Mercería por Mes',
+                                data: dataMerceria.map(entry => entry.total_sales),
+                                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                                borderColor: 'rgba(255, 206, 86, 1)',
+                                borderWidth: 2,
+                                hidden: true
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: [{
+                                    type: 'time',
+                                    time: {
+                                        unit: 'month',
+                                        displayFormats: {
+                                            month: 'MM/YYYY'
+                                        }
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Mes', // Agregado el título "Mes"
+                                        font: {
+                                            family: 'Arial',
+                                            size: 16,
+                                            weight: 'bold'
+                                        }
+                                    },
+                                    ticks: {
+                                        font: {
+                                            family: 'Arial',
+                                            size: 12,
+                                            weight: 'normal'
+                                        }
                                     }
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Mes'
+                                }],
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Ventas',
+                                        font: {
+                                            family: 'Arial',
+                                            size: 16,
+                                            weight: 'bold'
+                                        }
+                                    },
+                                    locale: 'es',
+                                    ticks: {
+                                        beginAtZero: true,
+                                        callback: function (value) {
+                                            return '$' + value.toLocaleString('es', {
+                                                minimumFractionDigits: 2
+                                            });
+                                        },
+                                        font: {
+                                            family: 'Arial',
+                                            size: 12,
+                                            weight: 'normal'
+                                        }
+                                    }
                                 }
-                            }],
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Ventas'
+                            },
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        usePointStyle: true,
+                                        padding: 20,
+                                        font: {
+                                            family: 'Arial',
+                                            size: 14,
+                                            weight: 'normal'
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                });
-                chart.data.datasets.push({
-        label: 'Ventas de Arreglos por Mes',
-        data: dataArreglos.map(entry => entry.total_sales),
-        backgroundColor: 'rgba(255, 99, 132, 0.2)', // Cambia el color si lo deseas
-        borderColor: 'rgba(255, 99, 132, 1)', // Cambia el color si lo deseas
-        borderWidth: 1,
-    });
-
-    chart.data.datasets.push({
-        label: 'Ventas de Telas por Mes',
-        data: dataTelas.map(entry => entry.total_sales),
-        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Cambia el color si lo deseas
-        borderColor: 'rgba(54, 162, 235, 1)', // Cambia el color si lo deseas
-        borderWidth: 1,
-    });
-
-    chart.data.datasets.push({
-        label: 'Ventas de Mercería por Mes',
-        data: dataMerceria.map(entry => entry.total_sales),
-        backgroundColor: 'rgba(255, 206, 86, 0.2)', // Cambia el color si lo deseas
-        borderColor: 'rgba(255, 206, 86, 1)', // Cambia el color si lo deseas
-        borderWidth: 1,
-    });
-
-    // Actualiza el gráfico
-    chart.update();
-            </script>
-            
-            
+                    });
+                </script>
             </div>
+            
         </div>
     </div>
 </div>
