@@ -73,6 +73,7 @@ class StatsController extends Controller
            ->orderBy('month')
            ->get();
             
-           return view('stats.index', compact('statsData', 'monthlySales', 'arregloSales', 'telaSales', 'merceriaSales'));
+           //return view('stats.index', compact('statsData', 'monthlySales', 'arregloSales', 'telaSales', 'merceriaSales'));
+           return view('stats.locked');
         }
 }
